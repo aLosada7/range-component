@@ -10,26 +10,25 @@ import { matchPasswordValidator } from '../../../shared/validators/match-passwor
 @Component({
   selector: 'lwa-sign-up-page',
   templateUrl: './sign-up-page.component.html',
-  styleUrls: ['./sign-up-page.component.scss']
+  styleUrls: ['./sign-up-page.component.scss'],
 })
 export class SignUpPageComponent implements OnInit {
-
   signUpForm: FormGroup;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    this.signUpForm = this.fb.group({
-      email: ['', [Validators.required, emailValidator]],
-      password: ['', [Validators.required, passwordValidator]],
-      repeatedPassword: ['', [Validators.required]]
-    }, { validator: matchPasswordValidator } );
+    this.signUpForm = this.fb.group(
+      {
+        email: ['', [Validators.required, emailValidator]],
+        password: ['', [Validators.required, passwordValidator]],
+        repeatedPassword: ['', [Validators.required]],
+      },
+      { validator: matchPasswordValidator }
+    );
   }
 
   matcher = new MyErrorStateMatcher();
 
-  signUp() {
-
-  }
-
+  signUp() {}
 }
