@@ -2,9 +2,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../material'
 import { ReactiveFormsModule } from '@angular/forms';
+import { VerticalStepperComponent } from './components/vertical-stepper/vertical-stepper.component';
 
+export const COMPONENTS = [
+    VerticalStepperComponent
+]
 @NgModule({
-  declarations: [],
+  declarations: [COMPONENTS],
   imports: [
     CommonModule,
     MaterialModule,
@@ -13,7 +17,8 @@ import { ReactiveFormsModule } from '@angular/forms';
   exports: [
     CommonModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    COMPONENTS
   ]
 })
 export class SharedModule { }

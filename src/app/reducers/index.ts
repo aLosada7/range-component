@@ -6,6 +6,7 @@ import {
   MetaReducer,
 } from '@ngrx/store';
 import { environment } from '../../environments/environment';
+import * as fromRouter from '@ngrx/router-store';
 
 /**
  * storeFreeze prevents state from being mutated. When mutation occurs, an
@@ -19,7 +20,7 @@ import { storeFreeze } from 'ngrx-store-freeze';
  * our top level state interface is just a map of keys to inner state types.
  */
 export interface State {
-
+    router: fromRouter.RouterReducerState;
 }
 
 /**
@@ -28,7 +29,7 @@ export interface State {
  * and the current or initial state and return a new immutable state.
  */
 export const reducers: ActionReducerMap<State> = {
-
+    router: fromRouter.routerReducer
 };
 
 export function logger(reducer: ActionReducer<State>): ActionReducer<State> {

@@ -1,14 +1,11 @@
 import { Injectable, Injector } from '@angular/core';
-import { FormControl } from '@angular/forms';
-
-import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SharedService {
 
-    private _userService: UserService;
+    /*private _userService: UserService;
 
     public get userService(): UserService {
         if (!this._userService) {
@@ -22,6 +19,6 @@ export class SharedService {
 
     arePasswordsEqual(password: string, repeatedPassword: string) {
         this._userService.arePasswordsEqual(password, repeatedPassword);
-    }
+    }*/
 
 }

@@ -1,4 +1,3 @@
-import { SignUpSuccess, SignUpFailure } from './../actions/auth-api.actions';
 import { AuthPageActions, AuthApiActions } from '../actions';
 
 export interface State {
@@ -15,6 +14,7 @@ export function reducer(
   state = initialState,
   action: AuthPageActions.AuthPageActionsUnion | AuthApiActions.AuthApiActionsUnion
 ): State {
+    console.log(action.type);
   switch (action.type) {
     case AuthPageActions.AuthPageActionTypes.SignUp: {
       return {
@@ -43,3 +43,5 @@ export function reducer(
     }
   }
 }
+
+export const getAuthError = (state: State) => state.error;

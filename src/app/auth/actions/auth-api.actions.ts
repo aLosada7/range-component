@@ -14,7 +14,9 @@ export class SignUpSuccess implements Action {
 export class SignUpFailure implements Action {
   type = AuthApiActionTypes.SignUpFailure;
 
-  constructor(public payload: string) {}
+  constructor(public payload: string) {
+      console.log(payload);
+  }
 }
 
 export type AuthApiActionsUnion =

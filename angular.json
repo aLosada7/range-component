@@ -28,8 +28,7 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "src/styles.scss"
+                "src/sass/main.scss"
             ],
             "scripts": []
           },
@@ -111,6 +110,7 @@
   },
   "defaultProject": "learning-with-alvaro-web",
   "cli": {
-    "analytics": "978c83a1-77ca-4449-85e5-9459f8c30291"
+    "analytics": "978c83a1-77ca-4449-85e5-9459f8c30291",
+    "defaultCollection": "@ngrx/schematics"
   }
 }

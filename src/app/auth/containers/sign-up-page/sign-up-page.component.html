@@ -1,22 +1,35 @@
-<form [formGroup]="signUpForm" (ngSubmit)="signUp()">
-	<mat-card>
-		<mat-card-title>Sign Up</mat-card-title>
-		<mat-card-content>
-			<mat-form-field>
-				<mat-label>Email</mat-label>
-        <input matInput formControlName="email">
-        <mat-error *ngIf="signUpForm.get('email').errors?.email">Email is not valid.</mat-error>
-			</mat-form-field>
-			<mat-form-field>
-				<mat-label>Password</mat-label>
-        <input matInput formControlName="password">
-        <mat-error *ngIf="signUpForm.get('password').errors?.password">Password does not meet the requirements.</mat-error>
-			</mat-form-field>
-			<mat-form-field>
-				<mat-label>Repeat your password</mat-label>
-        <input matInput formControlName="repeatedPassword" [errorStateMatcher]="matcher">
-        <mat-error *ngIf="!signUpForm.get('password').errors?.password && signUpForm.hasError('notSame')">Password does not meet the requirements.</mat-error>
-			</mat-form-field>
-		</mat-card-content>
-	</mat-card>
-</form>
+<div class="container">
+    <div class="row">
+        <div class="column-grow-auto stepper-container">
+            <div class="row">
+                <div class="column-auto">
+                    <h2 class="step-title">STEP {{ actualStep }} OF {{ steps.length }}</h2>
+                    <lwa-vertical-stepper
+                        [steps]="steps"
+                        [actual]="actualStep"></lwa-vertical-stepper>
+                </div>
+            </div>
+        </div>
+        <div class="column-grow-4 sign-up-container">
+            <form [formGroup]="signUpForm" (ngSubmit)="signUp()">
+                <div *ngIf="error$ | async" id="authError"><p>{{ error$ | async }}</p></div>
+                <mat-card>
+                    <mat-card-title class="card-title">Your information</mat-card-title>
+                    <mat-card-content>
+                        <lwa-user-data
+                            [signUpForm]="signUpForm"
+                            [matcher]="matcher"></lwa-user-data>
+                    </mat-card-content>
+                    <mat-card-actions>
+                        <div class="row">
+                            <div class="column-auto action-button">
+                                <button mat-raised-button type="submit" color="primary">Sign Up</button>
+                            </div>
+                        </div>
+                    </mat-card-actions>
+                </mat-card>
+            </form>
+        </div>
+        <div class="column-grow-auto"></div>
+    </div>
+</div>
