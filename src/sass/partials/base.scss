@@ -17,6 +17,10 @@ body {
     background-color: $light-grey;
 }
 
+.cursor {
+    cursor: pointer;
+}
+
 .container {
     padding: 16px;
     display: flex;
@@ -28,80 +32,57 @@ body {
     align-items: stretch;
     padding: 12px;
 
-    // different sizes
-    .column-grow-auto {
-        flex-grow: 1;
-    }
-
-    .column-grow-2 {
-        flex-grow: 2;
-    }
-
-    .column-grow-3 {
-        flex-grow: 3;
-    }
-
-    .column-grow-4 {
-        flex-grow: 4;
-    }
-
-    .column-grow-5 {
-        flex-grow: 5;
-    }
-
-    .column-grow-auto,
-    .column-grow-1
-    .column-grow-2
-    .column-grow-3
-    .column-grow-4,
-    .column-grow-5,
-    .column-auto,
-    .column-2,
-    .column-3,
-    .column-4,
-    .column-5 {
-      padding: 11px 5px 9px;
-      min-width: 0;
-
-      .mat-form-field {
-        padding: 0;
-
-        .mat-form-field-wrapper {
-            margin: 16px;
-        }
-      }
-
-      .mat-form-field-infix {
-        width: 80%;
-      }
-    }
-
-    // same sizes
-    .column-auto {
-        flex: 0 100%;
-    }
-
-    .column-2 {
-        flex: 0 50%;
-    }
-
-    .column-3 {
-        flex: 0 33.33%;
-    }
-
-    .column-4 {
-        flex: 0 25%;
-    }
-
-    .column-5 {
-        flex: 0 20%;
-    }
-
     @media only screen and (max-width: $bp-tablet) {
         display: block;
         padding: 0px;
         text-align: center;
     }
+}
+
+// titles
+h2 {
+    margin-top: 18px;
+    margin-bottom: 18px;
+    font-style: normal;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 18px;
+    letter-spacing: 2.3px;
+}
+
+// forms
+fieldset {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+label {
+    font-weight: 700;
+    text-transform: uppercase;
+    color: $darkest-grey;
+    line-height: 1.7;
+    font-size: 14px;
+    letter-spacing: 2px;
+}
+
+.submit .btn{
+    background: $primary-color;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 10px;
+    margin-top: 8px;
+}
+
+// hyperlink
+a {
+    text-decoration: none;
+}
+
+a:active, a:hover, a:link, a:visited {
+    color: #222;
 }
 
 .card-title {

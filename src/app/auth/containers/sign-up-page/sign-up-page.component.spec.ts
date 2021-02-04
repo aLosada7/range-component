@@ -1,26 +1,17 @@
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { async, ComponentFixture, ComponentFixtureAutoDetect, TestBed } from '@angular/core/testing';
-import { provideMockActions } from '@ngrx/effects/testing';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { By, BrowserModule } from '@angular/platform-browser';
-import { DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { TestScheduler } from 'rxjs/testing';
-import { StoreModule } from '@ngrx/store';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { SignUpPageComponent } from './sign-up-page.component';
-import { AuthPageActions, AuthApiActions  } from '../../actions'
-import { AuthPageActionTypes } from '../../actions/auth-page.actions';
 import * as fromAuthReducer from '../../reducers/auth.reducer';
-import { AuthApiActionTypes } from '../../actions/auth-api.actions';
-import { AuthEffects } from './../../effects/auth.effects';
-import { AuthService } from './../../services/auth.service';
 import { SharedModule } from './../../../shared/shared.module';
-import * as fromAuth from '../../reducers/auth.reducer';
-import { getAuthEntitiesState, getSignUpPageError } from '../../reducers';
+import { getSignUpPageError } from '../../reducers';
 
 let component: SignUpPageComponent;
 let fixture: ComponentFixture<SignUpPageComponent>;
+let button;
 
 describe('SignUpPageComponent', () => {
     let h2: HTMLElement;
@@ -60,11 +51,6 @@ describe('SignUpPageComponent', () => {
 		//element = form.nativeElement;
     });
 
-    it('vertical spinner title', () => {
-        const title = "STEP 1 OF 3";
-		expect(h2.textContent).toContain(title);
-	})
-
 	it('valid email', () => {
 		const email = "aldc30sc@gmail.com";
 		component.signUpForm.controls['email'].setValue(email);
@@ -90,134 +76,42 @@ describe('SignUpPageComponent', () => {
 		expect(component.signUpForm.controls['password'].errors?.password).toBeUndefined();
 	})
 
-	it('not valid password', () => {
+	it('not valid passwords', () => {
 		const password = "a123hello";
 		component.signUpForm.controls['password'].setValue(password);
 		expect(component.signUpForm.controls['password'].errors?.password).not.toBeUndefined();
     });
 
+    it("valid name and surname", () => {
+        component.signUpForm.controls['surnames'].setValue("");
+        expect(component.signUpForm.controls['surnames'].valid).toBeFalsy();
+        expect(component.signUpForm.controls['surnames'].hasError('required')).toBeTruthy();
+        component.signUpForm.controls['surnames'].setValue("Alvaro");
+        expect(component.signUpForm.controls['surnames'].valid).toBeTruthy();
+    })
+
 	it('valid form', () => {
-        component.signUpForm.controls['plan'].setValue("free");
-        component.signUpForm.controls['email'].setValue("alos@gmail.com")
+        component.signUpForm.controls['email'].setValue("alos@gmail.com");
+        component.signUpForm.controls['name'].setValue("Alvaro");
+        component.signUpForm.controls['surnames'].setValue("Losada");
         component.signUpForm.controls['password'].setValue("A123hello");
+        component.signUpForm.controls['repeatedPassword'].setValue("otherpassword");
+        expect(component.signUpForm.valid).toBeFalsy();
         component.signUpForm.controls['repeatedPassword'].setValue("A123hello");
         expect(component.signUpForm.valid).toBeTruthy();
     });
 
-    it('component updates when sign up fails', () => {
+    it('method launched when form submitted', () => {
+        jest.spyOn(component, 'signUp')
+        fixture.debugElement.query(By.css('#sign-up-form')).triggerEventHandler('submit', null);
+
+        expect(component.signUp).toHaveBeenCalled()
+    });
+
+    /*it('component updates when sign up fails', () => {
 
         const errorElement = fixture.debugElement.query(By.css("#authError"));
 
         expect(errorElement.nativeElement.textContent).toEqual(emailExistsError);
-    })
+    })*/
 });
-
-describe('Sign up actions', () => {
-
-	it('launch sign up action', () => {
-
-		const payload = { email: "aldc30sc@gmail.com", password: "A12345alosada" }
-		const action = new AuthPageActions.SignUp(payload);
-
-		expect(action.type).toEqual(AuthPageActionTypes.SignUp);
-		expect({...action}).toEqual({
-			type: AuthPageActionTypes.SignUp,
-			payload
-		})
-	});
-
-	it('success sign up action', () => {
-		const action = new AuthApiActions.SignUpSuccess();
-
-		expect({...action}).toEqual({
-			type: AuthApiActionTypes.SignUpSuccess
-		})
-    });
-
-    it('failure sign up action', () => {
-
-		const error = "Email already exists.";
-		const action = new AuthApiActions.SignUpFailure(error);
-
-		expect({...action}).toEqual({
-			type: AuthApiActionTypes.SignUpFailure,
-			payload: error
-        })
-
-	});
-});
-
-describe('Sign up reducer', () => {
-
-	it('loading a true when sign up starts', () => {
-		const { initialState } = fromAuthReducer;
-		const payload = { email: "aldc30sc@gmail.com", password: "A12345alosada" };
-		const action = new AuthPageActions.SignUp(payload);
-		const state = fromAuthReducer.reducer(initialState, action);
-
-		expect(state.loading).toBeTruthy();
-	})
-
-	it('loading a false when sign up ends and no error', () => {
-		const { initialState } = fromAuthReducer;
-		const payload = { email: "aldc30sc@gmail.com", password: "A12345alosada" };
-		const action = new AuthApiActions.SignUpSuccess();
-		const state = fromAuthReducer.reducer(initialState, action);
-
-		expect(state.loading).toBeFalsy();
-		expect(state.error).toBeNull();
-	})
-
-    it('loading a false when sign up ends and error', () => {
-        const { initialState } = fromAuthReducer;
-        const error = "Email already exists.";
-        const action = new AuthApiActions.SignUpFailure(error);
-        const state = fromAuthReducer.reducer(initialState, action);
-
-        expect(state.loading).toBeFalsy();
-        expect(state.error).not.toBeNull();
-    });
-});
-/*class MockAuthService {
-    signUp() {
-        return of({ success: true});
-    }
-}
-
-describe('Sign up effects', () => {
-    let actions$: Observable<any>;
-    let effects: AuthEffects;
-    let store: MockStore<State>;
-    let httpService: AuthService;
-
-    beforeEach(() => {
-        const { initialState } = fromAuthReducer;
-
-        TestBed.configureTestingModule({
-            providers: [
-                AuthEffects,
-                provideMockActions(() => actions$),
-                provideMockStore( { initialState }),
-                { provide: AuthService, useClass: MockAuthService }
-            ]
-        });
-
-        effects = TestBed.inject(AuthEffects);
-        store = TestBed.inject(MockStore);
-        httpService = TestBed.inject(AuthService);
-    })
-
-    it('fire if action invoked', (done) => {
-        const payload = { email: "aldc30sc@gmail.com", password: "A12345alosada" };
-
-        const spy = spyOn(httpService, 'signUp').and.callThrough();
-        actions$ = of(AuthPageActions.SignUp);
-
-        effects.onSignUp$.subscribe((res) => {
-            console.log(res);
-            expect(res).toEqual(new AuthApiActions.SignUpSuccess());
-            expect(spy).toHaveBeenCalledTimes(1);
-            done()
-        })
-    })
-})*/

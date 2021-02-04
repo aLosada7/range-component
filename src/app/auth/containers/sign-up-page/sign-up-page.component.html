@@ -1,35 +1,44 @@
-<div class="container">
-    <div class="row">
-        <div class="column-grow-auto stepper-container">
-            <div class="row">
-                <div class="column-auto">
-                    <h2 class="step-title">STEP {{ actualStep }} OF {{ steps.length }}</h2>
-                    <lwa-vertical-stepper
-                        [steps]="steps"
-                        [actual]="actualStep"></lwa-vertical-stepper>
+<div class="container sign-up-container">
+    <div class="card">
+        <div class="card-body">
+            <div class="auth-options">
+                <div class="active" [routerLink]="['/auth', 'sign-up']">
+                    <h2 class="cursor">Sign Up</h2>
+                </div>
+                <div [routerLink]="['/auth', 'login']">
+                    <h2 class="cursor">Sign In</h2>
                 </div>
             </div>
-        </div>
-        <div class="column-grow-4 sign-up-container">
-            <form [formGroup]="signUpForm" (ngSubmit)="signUp()">
-                <div *ngIf="error$ | async" id="authError"><p>{{ error$ | async }}</p></div>
-                <mat-card>
-                    <mat-card-title class="card-title">Your information</mat-card-title>
-                    <mat-card-content>
-                        <lwa-user-data
-                            [signUpForm]="signUpForm"
-                            [matcher]="matcher"></lwa-user-data>
-                    </mat-card-content>
-                    <mat-card-actions>
-                        <div class="row">
-                            <div class="column-auto action-button">
-                                <button mat-raised-button type="submit" color="primary">Sign Up</button>
-                            </div>
-                        </div>
-                    </mat-card-actions>
-                </mat-card>
+            <form id="sign-up-form" [formGroup]="signUpForm" (ngSubmit)="signUp()">
+                <h2>SIGN UP WITH EMAIL</h2>
+                <!--<div *ngIf="error$ | async" id="authError"><p>{{ error$ | async }}</p></div>-->
+                <fieldset>
+                    <div class="field">
+                        <label for="email" class="form-label form-control-lg">Email address:</label>
+                        <input type="email" class="form-control" formControlName="email">
+                        <small>We will send an e-mail confirmation here.</small>
+                    </div>
+                    <div class="field">
+                        <label for="name" class="form-label form-control-lg">Name:</label>
+                        <input type="text" class="form-control" formControlName="name">
+                    </div>
+                    <div class="field">
+                        <label for="surnames" class="form-label form-control-lg">Surnames:</label>
+                        <input type="text" class="form-control" formControlName="surnames">
+                    </div>
+                    <div class="field">
+                        <label for="password" class="form-label form-control-lg">Password:</label>
+                        <input type="password" class="form-control" formControlName="password">
+                    </div>
+                    <div class="field">
+                        <label for="repeatedPassword" class="form-label form-control-lg">Repeated password:</label>
+                        <input type="password" class="form-control" formControlName="repeatedPassword">
+                    </div>
+                    <div class="submit d-grid">
+                        <button class="btn" type="button">Sign Up</button>
+                    </div>
+                </fieldset>
             </form>
         </div>
-        <div class="column-grow-auto"></div>
     </div>
 </div>

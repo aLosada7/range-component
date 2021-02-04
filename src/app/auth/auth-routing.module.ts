@@ -1,12 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { AuthPageComponent } from './containers/auth-page/auth-page.component';
+import { LoginPageComponent } from './containers/login-page/login-page.component';
+import { PasswordResetPageComponent } from './containers/password-reset-page/password-reset-page.component';
 import { SignUpPageComponent } from './containers/sign-up-page/sign-up-page.component';
 
 const routes: Routes = [
-  { path: '', component: AuthPageComponent },
-  { path: 'sign-up', component: SignUpPageComponent }
+  { path: '', redirectTo: '/sign-up', pathMatch: 'full' },
+  { path: 'sign-up', component: SignUpPageComponent },
+  { path: 'login', component: LoginPageComponent },
+  { path: 'password/reset', component: PasswordResetPageComponent }
 ];
 
 @NgModule({

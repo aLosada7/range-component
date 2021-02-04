@@ -14,34 +14,33 @@ export function reducer(
   state = initialState,
   action: AuthPageActions.AuthPageActionsUnion | AuthApiActions.AuthApiActionsUnion
 ): State {
-    console.log(action.type);
-  switch (action.type) {
-    case AuthPageActions.AuthPageActionTypes.SignUp: {
-      return {
-        ...state,
-        loading: true,
-      };
-    }
+    switch (action.type) {
+        case AuthPageActions.AuthPageActionTypes.SignUp: {
+        return {
+            ...state,
+            loading: true,
+        };
+        }
 
-    case AuthApiActions.AuthApiActionTypes.SignUpSuccess: {
-      return {
-        ...state,
-        loading: false,
-      };
-    }
+        case AuthApiActions.AuthApiActionTypes.SignUpSuccess: {
+        return {
+            ...state,
+            loading: false,
+        };
+        }
 
-    case AuthApiActions.AuthApiActionTypes.SignUpFailure: {
-      return {
-        ...state,
-        loading: false,
-        error: "There is an error"
-      };
-    }
+        case AuthApiActions.AuthApiActionTypes.SignUpFailure: {
+        return {
+            ...state,
+            loading: false,
+            error: "There is an error"
+        };
+        }
 
-    default: {
-      return state;
+        default: {
+        return state;
+        }
     }
-  }
 }
 
 export const getAuthError = (state: State) => state.error;
