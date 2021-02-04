@@ -76,6 +76,20 @@ label {
     margin-top: 8px;
 }
 
+.feedback {
+
+    margin-top: .25rem;
+    font-size: 80%;
+
+    &__valid {
+        color: $green;
+    }
+
+    &__invalid {
+        color: $red;
+    }
+}
+
 // hyperlink
 a {
     text-decoration: none;

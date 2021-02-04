@@ -11,31 +11,46 @@
             </div>
             <form id="sign-up-form" [formGroup]="signUpForm" (ngSubmit)="signUp()">
                 <h2>SIGN UP WITH EMAIL</h2>
-                <!--<div *ngIf="error$ | async" id="authError"><p>{{ error$ | async }}</p></div>-->
+                <div *ngIf="error$ | async" id="authError"><p>{{ error$ | async }}</p></div>
                 <fieldset>
                     <div class="field">
                         <label for="email" class="form-label form-control-lg">Email address:</label>
                         <input type="email" class="form-control" formControlName="email">
                         <small>We will send an e-mail confirmation here.</small>
+                        <div *ngIf="signUpForm.get('email').errors?.email" class="feedback__invalid">Email is not valid.</div>
                     </div>
                     <div class="field">
                         <label for="name" class="form-label form-control-lg">Name:</label>
                         <input type="text" class="form-control" formControlName="name">
+                        <div *ngIf="signUpForm.get('name').errors?.required && signUpForm.get('surnames').touched"
+                        class="feedback__invalid">
+                            Your name is required.
+                        </div>
                     </div>
                     <div class="field">
                         <label for="surnames" class="form-label form-control-lg">Surnames:</label>
                         <input type="text" class="form-control" formControlName="surnames">
+                        <div *ngIf="signUpForm.get('surnames').errors?.required && signUpForm.get('surnames').touched"
+                        class="feedback__invalid">
+                            Your surnames are required.
+                        </div>
                     </div>
                     <div class="field">
                         <label for="password" class="form-label form-control-lg">Password:</label>
                         <input type="password" class="form-control" formControlName="password">
+                        <div *ngIf="signUpForm.get('password').errors?.password" class="feedback__invalid">Password does not meet the requirements.</div>
                     </div>
                     <div class="field">
                         <label for="repeatedPassword" class="form-label form-control-lg">Repeated password:</label>
                         <input type="password" class="form-control" formControlName="repeatedPassword">
+                        <div
+                            *ngIf="!signUpForm.get('password').errors?.password && signUpForm.hasError('notSame')"
+                            class="feedback__invalid">
+                            Passwords are not equal.
+                        </div>
                     </div>
                     <div class="submit d-grid">
-                        <button class="btn" type="button">Sign Up</button>
+                        <button type="submit" class="btn">Sign Up</button>
                     </div>
                 </fieldset>
             </form>
