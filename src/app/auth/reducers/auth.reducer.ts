@@ -18,7 +18,8 @@ export function reducer(
         case AuthPageActions.AuthPageActionTypes.SignUp:
         case AuthPageActions.AuthPageActionTypes.Login:
         case AuthPageActions.AuthPageActionTypes.RecoverPassword:
-        case AuthPageActions.AuthPageActionTypes.CreatePassword: {
+        case AuthPageActions.AuthPageActionTypes.CreatePassword:
+        case AuthPageActions.AuthPageActionTypes.EmailConfirmation: {
             return {
                 ...state,
                 loading: true,
@@ -28,7 +29,8 @@ export function reducer(
         case AuthApiActions.AuthApiActionTypes.SignUpSuccess:
         case AuthApiActions.AuthApiActionTypes.LoginSuccess:
         case AuthApiActions.AuthApiActionTypes.RecoverPasswordSuccess:
-        case AuthApiActions.AuthApiActionTypes.CreatePasswordSuccess: {
+        case AuthApiActions.AuthApiActionTypes.CreatePasswordSuccess:
+        case AuthApiActions.AuthApiActionTypes.EmailConfirmationSuccess: {
             return {
                 ...state,
                 loading: false,
@@ -38,7 +40,8 @@ export function reducer(
         case AuthApiActions.AuthApiActionTypes.SignUpFailure:
         case AuthApiActions.AuthApiActionTypes.LoginFailure:
         case AuthApiActions.AuthApiActionTypes.RecoverPasswordFailure:
-        case AuthApiActions.AuthApiActionTypes.CreatePasswordSuccess:  {
+        case AuthApiActions.AuthApiActionTypes.CreatePasswordFailure:
+        case AuthApiActions.AuthApiActionTypes.EmailConfirmationFailure: {
             return {
                 ...state,
                 loading: false,
@@ -47,7 +50,7 @@ export function reducer(
         }
 
         default: {
-        return state;
+            return state;
         }
     }
 }

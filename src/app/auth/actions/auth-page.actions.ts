@@ -5,6 +5,7 @@ export enum AuthPageActionTypes {
     Login = "[Auth Page] Login",
     RecoverPassword = "[Auth Page] Recover Password",
     CreatePassword = "[Auth Page] Create Password",
+    EmailConfirmation = "[Auth Page] Email Confirmation",
 }
 
 export class SignUp implements Action {
@@ -31,8 +32,15 @@ export class CreatePassword implements Action {
     constructor(public payload: any) {}
 }
 
+export class EmailConfirmation implements Action {
+    type = AuthPageActionTypes.EmailConfirmation;
+
+    constructor(public payload: any) {}
+}
+
 export type AuthPageActionsUnion =
 SignUp |
 Login |
 RecoverPassword |
-CreatePassword
+CreatePassword |
+EmailConfirmation

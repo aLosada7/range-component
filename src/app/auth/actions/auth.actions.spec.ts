@@ -28,11 +28,11 @@ describe('Auth actions', () => {
         it('failure sign up action', () => {
 
             const error = "Email already exists.";
-            const action = new AuthApiActions.SignUpFailure(error);
+            const action = new AuthApiActions.SignUpFailure({ error });
 
             expect({...action}).toEqual({
                 type: AuthApiActionTypes.SignUpFailure,
-                payload: error
+                payload: { error }
             })
 
         });
@@ -63,11 +63,11 @@ describe('Auth actions', () => {
         it('failure login action', () => {
 
             const error = "Wrong credentials.";
-            const action = new AuthApiActions.LoginFailure(error);
+            const action = new AuthApiActions.LoginFailure({ error });
 
             expect({...action}).toEqual({
                 type: AuthApiActionTypes.LoginFailure,
-                payload: error
+                payload: { error }
             })
 
         });
@@ -98,11 +98,11 @@ describe('Auth actions', () => {
         it('failure password recover action', () => {
 
             const error = "Wrong e-mail.";
-            const action = new AuthApiActions.RecoverPasswordFailure(error);
+            const action = new AuthApiActions.RecoverPasswordFailure({ error });
 
             expect({...action}).toEqual({
                 type: AuthApiActionTypes.RecoverPasswordFailure,
-                payload: error
+                payload: { error }
             })
 
         });
@@ -133,11 +133,46 @@ describe('Auth actions', () => {
         it('failure create password action', () => {
 
             const error = "Wrong e-mail.";
-            const action = new AuthApiActions.CreatePasswordFailure(error);
+            const action = new AuthApiActions.CreatePasswordFailure({ error });
 
             expect({...action}).toEqual({
                 type: AuthApiActionTypes.CreatePasswordFailure,
-                payload: error
+                payload: { error }
+            })
+
+        });
+    });
+
+    describe('email confirmation actions', () => {
+
+        it('email confirmation action', () => {
+
+            const payload = { email: "aldc30sc@gmail.com" }
+            const action = new AuthPageActions.CreatePassword(payload);
+
+            expect(action.type).toEqual(AuthPageActionTypes.CreatePassword);
+            expect({...action}).toEqual({
+                type: AuthPageActionTypes.CreatePassword,
+                payload
+            })
+        });
+
+        it('success email confirmation action', () => {
+            const action = new AuthApiActions.EmailConfirmationSuccess();
+
+            expect({...action}).toEqual({
+                type: AuthApiActionTypes.EmailConfirmationSuccess
+            })
+        });
+
+        it('failure email confirmation action', () => {
+
+            const error = "Wrong e-mail.";
+            const action = new AuthApiActions.CreatePasswordFailure({ error });
+
+            expect({...action}).toEqual({
+                type: AuthApiActionTypes.CreatePasswordFailure,
+                payload: { error }
             })
 
         });

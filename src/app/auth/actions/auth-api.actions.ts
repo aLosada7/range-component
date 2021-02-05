@@ -9,12 +9,14 @@ export enum AuthApiActionTypes {
   RecoverPasswordFailure = '[Auth/API] Recover Password Failure',
   CreatePasswordSuccess = '[Auth/API] Create Password Success',
   CreatePasswordFailure = '[Auth/API] Create Password Failure',
+  EmailConfirmationSuccess = '[Auth/API] Email Confirmation Success',
+  EmailConfirmationFailure = '[Auth/API] Email Confirmation Failure',
 }
 
 export class SignUpSuccess implements Action {
     type = AuthApiActionTypes.SignUpSuccess;
 
-    constructor(public payload: any) {}
+    constructor(public payload?: any) {}
 }
 
 export class SignUpFailure implements Action {
@@ -26,7 +28,7 @@ export class SignUpFailure implements Action {
 export class LoginSuccess implements Action {
     type = AuthApiActionTypes.LoginSuccess;
 
-    constructor(public payload: any) {}
+    constructor(public payload?: any) {}
   }
 
 export class LoginFailure implements Action {
@@ -38,7 +40,7 @@ export class LoginFailure implements Action {
 export class RecoverPasswordSuccess implements Action {
     type = AuthApiActionTypes.RecoverPasswordSuccess;
 
-    constructor(public payload: any) {}
+    constructor(public payload?: any) {}
   }
 
 export class RecoverPasswordFailure implements Action {
@@ -50,11 +52,23 @@ export class RecoverPasswordFailure implements Action {
 export class CreatePasswordSuccess implements Action {
     type = AuthApiActionTypes.CreatePasswordSuccess;
 
-    constructor(public payload: any) {}
+    constructor(public payload?: any) {}
   }
 
 export class CreatePasswordFailure implements Action {
     readonly type = AuthApiActionTypes.CreatePasswordFailure;
+
+    constructor(public payload: { error: any }) {}
+}
+
+export class EmailConfirmationSuccess implements Action {
+    type = AuthApiActionTypes.EmailConfirmationSuccess;
+
+    constructor(public payload?: any) {}
+  }
+
+export class EmailConfirmationFailure implements Action {
+    readonly type = AuthApiActionTypes.EmailConfirmationFailure;
 
     constructor(public payload: { error: any }) {}
 }
@@ -67,4 +81,6 @@ LoginFailure |
 RecoverPasswordSuccess |
 RecoverPasswordFailure |
 CreatePasswordSuccess |
-CreatePasswordFailure
+CreatePasswordFailure |
+EmailConfirmationSuccess |
+EmailConfirmationFailure

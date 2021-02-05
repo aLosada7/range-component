@@ -36,7 +36,7 @@ describe('auth reducer', () => {
         it('loading a false when sign up ends and error', () => {
             const { initialState } = fromAuthReducer;
             const error = "Email already exists.";
-            const action = new AuthApiActions.SignUpFailure(error);
+            const action = new AuthApiActions.SignUpFailure({ error });
             const state = fromAuthReducer.reducer(initialState, action);
 
             expect(state.loading).toBeFalsy();
@@ -69,7 +69,7 @@ describe('auth reducer', () => {
         it('loading a false when login ends and error', () => {
             const { initialState } = fromAuthReducer;
             const error = "Wrong credentials.";
-            const action = new AuthApiActions.LoginFailure(error);
+            const action = new AuthApiActions.LoginFailure({ error });
             const state = fromAuthReducer.reducer(initialState, action);
 
             expect(state.loading).toBeFalsy();
@@ -91,7 +91,6 @@ describe('auth reducer', () => {
 
         it('loading a false when recover password ends and no error', () => {
             const { initialState } = fromAuthReducer;
-            const payload = { email: "aldc30sc@gmail.com"};
             const action = new AuthApiActions.RecoverPasswordSuccess();
             const state = fromAuthReducer.reducer(initialState, action);
 
@@ -102,7 +101,71 @@ describe('auth reducer', () => {
         it('loading a false when recover password ends and error', () => {
             const { initialState } = fromAuthReducer;
             const error = "Wrong credentials.";
-            const action = new AuthApiActions.RecoverPasswordFailure(error);
+            const action = new AuthApiActions.RecoverPasswordFailure({ error });
+            const state = fromAuthReducer.reducer(initialState, action);
+
+            expect(state.loading).toBeFalsy();
+            expect(state.error).not.toBeNull();
+        });
+
+    });
+
+    describe('create password reducer', () => {
+
+        it('loading to true when create passwordstarts', () => {
+            const { initialState } = fromAuthReducer;
+            const payload = { password: "A123alvaro", repeatedPassword: "A123alvaro" };
+            const action = new AuthPageActions.CreatePassword(payload);
+            const state = fromAuthReducer.reducer(initialState, action);
+
+            expect(state.loading).toBeTruthy();
+        })
+
+        it('loading to false when create password ends and no error', () => {
+            const { initialState } = fromAuthReducer;
+            const action = new AuthApiActions.CreatePasswordSuccess();
+            const state = fromAuthReducer.reducer(initialState, action);
+
+            expect(state.loading).toBeFalsy();
+            expect(state.error).toBeNull();
+        })
+
+        it('loading to false when create password ends and error', () => {
+            const { initialState } = fromAuthReducer;
+            const error = "Wrong credentials.";
+            const action = new AuthApiActions.CreatePasswordFailure({ error });
+            const state = fromAuthReducer.reducer(initialState, action);
+
+            expect(state.loading).toBeFalsy();
+            expect(state.error).not.toBeNull();
+        });
+
+    });
+
+    describe('Email confirmation reducer', () => {
+
+        it('loading a true when remail confirmation starts', () => {
+            const { initialState } = fromAuthReducer;
+            const payload = { email: "aldc30sc@gmail.com" };
+            const action = new AuthPageActions.EmailConfirmation(payload);
+            const state = fromAuthReducer.reducer(initialState, action);
+
+            expect(state.loading).toBeTruthy();
+        })
+
+        it('loading a false when email confirmationends and no error', () => {
+            const { initialState } = fromAuthReducer;
+            const action = new AuthApiActions.EmailConfirmationSuccess();
+            const state = fromAuthReducer.reducer(initialState, action);
+
+            expect(state.loading).toBeFalsy();
+            expect(state.error).toBeNull();
+        })
+
+        it('loading a false when email confirmation ends and error', () => {
+            const { initialState } = fromAuthReducer;
+            const error = "Wrong credentials.";
+            const action = new AuthApiActions.EmailConfirmationFailure({ error });
             const state = fromAuthReducer.reducer(initialState, action);
 
             expect(state.loading).toBeFalsy();
@@ -111,47 +174,3 @@ describe('auth reducer', () => {
 
     });
 });
-
-/*class MockAuthService {
-    signUp() {
-        return of({ success: true});
-    }
-}
-
-describe('Sign up effects', () => {
-    let actions$: Observable<any>;
-    let effects: AuthEffects;
-    let store: MockStore<State>;
-    let httpService: AuthService;
-
-    beforeEach(() => {
-        const { initialState } = fromAuthReducer;
-
-        TestBed.configureTestingModule({
-            providers: [
-                AuthEffects,
-                provideMockActions(() => actions$),
-                provideMockStore( { initialState }),
-                { provide: AuthService, useClass: MockAuthService }
-            ]
-        });
-
-        effects = TestBed.inject(AuthEffects);
-        store = TestBed.inject(MockStore);
-        httpService = TestBed.inject(AuthService);
-    })
-
-    it('fire if action invoked', (done) => {
-        const payload = { email: "aldc30sc@gmail.com", password: "A12345alosada" };
-
-        const spy = spyOn(httpService, 'signUp').and.callThrough();
-        actions$ = of(AuthPageActions.SignUp);
-
-        effects.onSignUp$.subscribe((res) => {
-            console.log(res);
-            expect(res).toEqual(new AuthApiActions.SignUpSuccess());
-            expect(spy).toHaveBeenCalledTimes(1);
-            done()
-        })
-    })
-})*/
