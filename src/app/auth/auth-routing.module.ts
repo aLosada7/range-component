@@ -1,3 +1,5 @@
+import { PasswordCreatePageComponent } from './containers/password-create-page/password-create-page.component';
+import { EmailVerificationPageComponent } from './containers/email-verification-page/email-verification-page.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -9,7 +11,9 @@ const routes: Routes = [
   { path: '', redirectTo: '/sign-up', pathMatch: 'full' },
   { path: 'sign-up', component: SignUpPageComponent },
   { path: 'login', component: LoginPageComponent },
-  { path: 'password/reset', component: PasswordResetPageComponent }
+  { path: 'password/reset', component: PasswordResetPageComponent },
+  { path: 'password/create', component: PasswordCreatePageComponent },
+  { path: 'email-verification', component: EmailVerificationPageComponent }
 ];
 
 @NgModule({
