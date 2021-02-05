@@ -17,30 +17,33 @@ export function reducer(
     switch (action.type) {
         case AuthPageActions.AuthPageActionTypes.SignUp:
         case AuthPageActions.AuthPageActionTypes.Login:
-        case AuthPageActions.AuthPageActionTypes.RecoverPassword: {
-        return {
-            ...state,
-            loading: true,
-        };
+        case AuthPageActions.AuthPageActionTypes.RecoverPassword:
+        case AuthPageActions.AuthPageActionTypes.CreatePassword: {
+            return {
+                ...state,
+                loading: true,
+            };
         }
 
         case AuthApiActions.AuthApiActionTypes.SignUpSuccess:
         case AuthApiActions.AuthApiActionTypes.LoginSuccess:
-        case AuthApiActions.AuthApiActionTypes.RecoverPasswordSuccess: {
-        return {
-            ...state,
-            loading: false,
-        };
+        case AuthApiActions.AuthApiActionTypes.RecoverPasswordSuccess:
+        case AuthApiActions.AuthApiActionTypes.CreatePasswordSuccess: {
+            return {
+                ...state,
+                loading: false,
+            };
         }
 
         case AuthApiActions.AuthApiActionTypes.SignUpFailure:
         case AuthApiActions.AuthApiActionTypes.LoginFailure:
-        case AuthApiActions.AuthApiActionTypes.RecoverPasswordFailure:  {
-        return {
-            ...state,
-            loading: false,
-            error: "There is an error"
-        };
+        case AuthApiActions.AuthApiActionTypes.RecoverPasswordFailure:
+        case AuthApiActions.AuthApiActionTypes.CreatePasswordSuccess:  {
+            return {
+                ...state,
+                loading: false,
+                error: action.payload
+            };
         }
 
         default: {

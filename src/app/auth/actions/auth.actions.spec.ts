@@ -107,6 +107,41 @@ describe('Auth actions', () => {
 
         });
     });
+
+    describe('create password actions', () => {
+
+        it('create password action', () => {
+
+            const payload = { password: "A123alvaro", repeatedPassword: "A123alvaro" }
+            const action = new AuthPageActions.CreatePassword(payload);
+
+            expect(action.type).toEqual(AuthPageActionTypes.CreatePassword);
+            expect({...action}).toEqual({
+                type: AuthPageActionTypes.CreatePassword,
+                payload
+            })
+        });
+
+        it('success create password action', () => {
+            const action = new AuthApiActions.CreatePasswordSuccess();
+
+            expect({...action}).toEqual({
+                type: AuthApiActionTypes.CreatePasswordSuccess
+            })
+        });
+
+        it('failure create password action', () => {
+
+            const error = "Wrong e-mail.";
+            const action = new AuthApiActions.CreatePasswordFailure(error);
+
+            expect({...action}).toEqual({
+                type: AuthApiActionTypes.CreatePasswordFailure,
+                payload: error
+            })
+
+        });
+    });
 });
 
 

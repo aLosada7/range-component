@@ -7,42 +7,56 @@ export enum AuthApiActionTypes {
   LoginFailure = '[Auth/API] Login Failure',
   RecoverPasswordSuccess = '[Auth/API] Recover Password Success',
   RecoverPasswordFailure = '[Auth/API] Recover Password Failure',
+  CreatePasswordSuccess = '[Auth/API] Create Password Success',
+  CreatePasswordFailure = '[Auth/API] Create Password Failure',
 }
 
 export class SignUpSuccess implements Action {
-  type = AuthApiActionTypes.SignUpSuccess;
+    type = AuthApiActionTypes.SignUpSuccess;
 
-  constructor() {}
+    constructor(public payload: any) {}
 }
 
 export class SignUpFailure implements Action {
-  type = AuthApiActionTypes.SignUpFailure;
+    readonly type = AuthApiActionTypes.SignUpFailure;
 
-  constructor(public payload: string) {}
+    constructor(public payload: { error: any }) {}
 }
 
 export class LoginSuccess implements Action {
     type = AuthApiActionTypes.LoginSuccess;
 
-    constructor() {}
+    constructor(public payload: any) {}
   }
 
 export class LoginFailure implements Action {
-type = AuthApiActionTypes.LoginFailure;
+    readonly type = AuthApiActionTypes.LoginFailure;
 
-constructor(public payload: string) {}
+    constructor(public payload: { error: any }) {}
 }
 
 export class RecoverPasswordSuccess implements Action {
     type = AuthApiActionTypes.RecoverPasswordSuccess;
 
-    constructor() {}
+    constructor(public payload: any) {}
   }
 
 export class RecoverPasswordFailure implements Action {
-type = AuthApiActionTypes.RecoverPasswordFailure;
+    readonly type = AuthApiActionTypes.RecoverPasswordFailure;
 
-constructor(public payload: string) {}
+    constructor(public payload: { error: any }) {}
+}
+
+export class CreatePasswordSuccess implements Action {
+    type = AuthApiActionTypes.CreatePasswordSuccess;
+
+    constructor(public payload: any) {}
+  }
+
+export class CreatePasswordFailure implements Action {
+    readonly type = AuthApiActionTypes.CreatePasswordFailure;
+
+    constructor(public payload: { error: any }) {}
 }
 
 export type AuthApiActionsUnion =
@@ -51,4 +65,6 @@ SignUpFailure |
 LoginSuccess |
 LoginFailure |
 RecoverPasswordSuccess |
-RecoverPasswordFailure
+RecoverPasswordFailure |
+CreatePasswordSuccess |
+CreatePasswordFailure

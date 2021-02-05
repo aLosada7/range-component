@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
 import { emailValidator } from '../../../shared/validators/email.validator';
+import { AuthPageActions } from '../../actions';
 import * as fromAuth from '../../reducers';
 
 @Component({
@@ -25,7 +26,12 @@ export class PasswordResetPageComponent implements OnInit {
     }
 
     passwordReset() {
-
+        if (this.passwordResetForm.valid) {
+            const user = {
+                email: this.passwordResetForm.get("email").value
+            }
+            this.store.dispatch(new AuthPageActions.RecoverPassword(user));
+        }
     }
 
 }

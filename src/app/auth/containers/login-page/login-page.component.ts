@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
 import { emailValidator } from '../../../shared/validators/email.validator';
-import { passwordValidator } from '../../../shared/validators/password.validator';
+import { AuthPageActions } from '../../actions';
 import * as fromAuth from '../../reducers';
 
 @Component({
@@ -14,8 +14,8 @@ export class LoginPageComponent implements OnInit {
 
     loginForm: FormGroup;
 
-  constructor(private store: Store<fromAuth.State>,
-    private fb: FormBuilder) { }
+    constructor(private store: Store<fromAuth.State>,
+        private fb: FormBuilder) { }
 
     ngOnInit(): void {
         this.loginForm = this.fb.group(
@@ -27,7 +27,13 @@ export class LoginPageComponent implements OnInit {
     }
 
     login() {
-
+        if (this.loginForm.valid) {
+            const user = {
+                email: this.loginForm.get("email").value,
+                password: this.loginForm.get("password").value
+            }
+            this.store.dispatch(new AuthPageActions.Login(user));
+        }
     }
 
 }
