@@ -1,4 +1,4 @@
-import { asyncScheduler, Observable, ReplaySubject } from 'rxjs';
+import { asyncScheduler, Observable, ReplaySubject, throwError } from 'rxjs';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { Action } from '@ngrx/store';
 import { TestBed } from '@angular/core/testing';
@@ -17,6 +17,7 @@ describe('Auth actions', () => {
 
     let actions$;
     let authEffects;
+    const payload = { email: "aldc30sc@gmail.com", password: "A12345alosada" }
 
     beforeEach(() => {
 		TestBed.configureTestingModule({
@@ -30,9 +31,7 @@ describe('Auth actions', () => {
         authEffects = TestBed.inject(AuthEffects)
     });
 
-
     it('should return an SIGN_UP_SUCCESS action', async done => {
-        const payload = { email: "aldc30sc@gmail.com", password: "A12345alosada" }
 
         authService.signUp.mockReturnValue(of({}));
 
@@ -45,6 +44,26 @@ describe('Auth actions', () => {
         }).subscribe(action => {
             expect(action).toEqual({
               type: '[Auth/API] Sign Up Success'
+            });
+            done();
+        });
+    });
+
+    it('should return an SIGN_UP_FAILURE action', async done => {
+        const error = 'Wrong credentials introduced';
+
+        authService.signUp.mockReturnValue(throwError({ error }));
+
+        actions$ = new ReplaySubject(1);
+        actions$.next(new AuthPageActions.SignUp(payload));
+
+        authEffects.onSignUp$({
+            debounce: 300,
+            scheduler: asyncScheduler,
+        }).subscribe(action => {
+            expect(action).toEqual({
+              type: '[Auth/API] Sign Up Failure',
+              payload: error
             });
             done();
         });
