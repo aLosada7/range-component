@@ -15,21 +15,27 @@ export function reducer(
   action: AuthPageActions.AuthPageActionsUnion | AuthApiActions.AuthApiActionsUnion
 ): State {
     switch (action.type) {
-        case AuthPageActions.AuthPageActionTypes.SignUp: {
+        case AuthPageActions.AuthPageActionTypes.SignUp:
+        case AuthPageActions.AuthPageActionTypes.Login:
+        case AuthPageActions.AuthPageActionTypes.RecoverPassword: {
         return {
             ...state,
             loading: true,
         };
         }
 
-        case AuthApiActions.AuthApiActionTypes.SignUpSuccess: {
+        case AuthApiActions.AuthApiActionTypes.SignUpSuccess:
+        case AuthApiActions.AuthApiActionTypes.LoginSuccess:
+        case AuthApiActions.AuthApiActionTypes.RecoverPasswordSuccess: {
         return {
             ...state,
             loading: false,
         };
         }
 
-        case AuthApiActions.AuthApiActionTypes.SignUpFailure: {
+        case AuthApiActions.AuthApiActionTypes.SignUpFailure:
+        case AuthApiActions.AuthApiActionTypes.LoginFailure:
+        case AuthApiActions.AuthApiActionTypes.RecoverPasswordFailure:  {
         return {
             ...state,
             loading: false,

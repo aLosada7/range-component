@@ -11,39 +11,107 @@ import { StoreModule } from '@ngrx/store';*/
 import { AuthPageActions, AuthApiActions  } from '../actions'
 import * as fromAuthReducer from '../reducers/auth.reducer';
 
+describe('auth reducer', () => {
+    describe('Sign up reducer', () => {
 
-describe('Sign up reducer', () => {
+        it('loading a true when sign up starts', () => {
+            const { initialState } = fromAuthReducer;
+            const payload = { email: "aldc30sc@gmail.com", password: "A12345alosada" };
+            const action = new AuthPageActions.SignUp(payload);
+            const state = fromAuthReducer.reducer(initialState, action);
 
-	it('loading a true when sign up starts', () => {
-		const { initialState } = fromAuthReducer;
-		const payload = { email: "aldc30sc@gmail.com", password: "A12345alosada" };
-		const action = new AuthPageActions.SignUp(payload);
-		const state = fromAuthReducer.reducer(initialState, action);
+            expect(state.loading).toBeTruthy();
+        })
 
-		expect(state.loading).toBeTruthy();
-	})
+        it('loading a false when sign up ends and no error', () => {
+            const { initialState } = fromAuthReducer;
+            const payload = { email: "aldc30sc@gmail.com", password: "A12345alosada" };
+            const action = new AuthApiActions.SignUpSuccess();
+            const state = fromAuthReducer.reducer(initialState, action);
 
-	it('loading a false when sign up ends and no error', () => {
-		const { initialState } = fromAuthReducer;
-		const payload = { email: "aldc30sc@gmail.com", password: "A12345alosada" };
-		const action = new AuthApiActions.SignUpSuccess();
-		const state = fromAuthReducer.reducer(initialState, action);
+            expect(state.loading).toBeFalsy();
+            expect(state.error).toBeNull();
+        })
 
-		expect(state.loading).toBeFalsy();
-		expect(state.error).toBeNull();
-	})
+        it('loading a false when sign up ends and error', () => {
+            const { initialState } = fromAuthReducer;
+            const error = "Email already exists.";
+            const action = new AuthApiActions.SignUpFailure(error);
+            const state = fromAuthReducer.reducer(initialState, action);
 
-    it('loading a false when sign up ends and error', () => {
-        const { initialState } = fromAuthReducer;
-        const error = "Email already exists.";
-        const action = new AuthApiActions.SignUpFailure(error);
-        const state = fromAuthReducer.reducer(initialState, action);
+            expect(state.loading).toBeFalsy();
+            expect(state.error).not.toBeNull();
+        });
 
-        expect(state.loading).toBeFalsy();
-        expect(state.error).not.toBeNull();
     });
 
+    describe('Login reducer', () => {
+
+        it('loading a true when login starts', () => {
+            const { initialState } = fromAuthReducer;
+            const payload = { email: "aldc30sc@gmail.com", password: "A12345alosada" };
+            const action = new AuthPageActions.Login(payload);
+            const state = fromAuthReducer.reducer(initialState, action);
+
+            expect(state.loading).toBeTruthy();
+        })
+
+        it('loading a false when login ends and no error', () => {
+            const { initialState } = fromAuthReducer;
+            const payload = { email: "aldc30sc@gmail.com", password: "A12345alosada" };
+            const action = new AuthApiActions.LoginSuccess();
+            const state = fromAuthReducer.reducer(initialState, action);
+
+            expect(state.loading).toBeFalsy();
+            expect(state.error).toBeNull();
+        })
+
+        it('loading a false when login ends and error', () => {
+            const { initialState } = fromAuthReducer;
+            const error = "Wrong credentials.";
+            const action = new AuthApiActions.LoginFailure(error);
+            const state = fromAuthReducer.reducer(initialState, action);
+
+            expect(state.loading).toBeFalsy();
+            expect(state.error).not.toBeNull();
+        });
+
+    });
+
+    describe('Recover password reducer', () => {
+
+        it('loading a true when recover password starts', () => {
+            const { initialState } = fromAuthReducer;
+            const payload = { email: "aldc30sc@gmail.com" };
+            const action = new AuthPageActions.RecoverPassword(payload);
+            const state = fromAuthReducer.reducer(initialState, action);
+
+            expect(state.loading).toBeTruthy();
+        })
+
+        it('loading a false when recover password ends and no error', () => {
+            const { initialState } = fromAuthReducer;
+            const payload = { email: "aldc30sc@gmail.com"};
+            const action = new AuthApiActions.RecoverPasswordSuccess();
+            const state = fromAuthReducer.reducer(initialState, action);
+
+            expect(state.loading).toBeFalsy();
+            expect(state.error).toBeNull();
+        })
+
+        it('loading a false when recover password ends and error', () => {
+            const { initialState } = fromAuthReducer;
+            const error = "Wrong credentials.";
+            const action = new AuthApiActions.RecoverPasswordFailure(error);
+            const state = fromAuthReducer.reducer(initialState, action);
+
+            expect(state.loading).toBeFalsy();
+            expect(state.error).not.toBeNull();
+        });
+
+    });
 });
+
 /*class MockAuthService {
     signUp() {
         return of({ success: true});

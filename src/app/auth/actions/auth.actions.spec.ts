@@ -2,37 +2,111 @@ import { AuthPageActions, AuthApiActions  } from '../actions'
 import { AuthApiActionTypes } from './auth-api.actions';
 import { AuthPageActionTypes } from './auth-page.actions';
 
-describe('Sign up actions', () => {
+describe('Auth actions', () => {
+    describe('Sign up actions', () => {
 
-	it('launch sign up action', () => {
+        it('launch sign up action', () => {
 
-		const payload = { email: "aldc30sc@gmail.com", password: "A12345alosada" }
-		const action = new AuthPageActions.SignUp(payload);
+            const payload = { email: "aldc30sc@gmail.com", password: "A12345alosada" }
+            const action = new AuthPageActions.SignUp(payload);
 
-		expect(action.type).toEqual(AuthPageActionTypes.SignUp);
-		expect({...action}).toEqual({
-			type: AuthPageActionTypes.SignUp,
-			payload
-		})
-	});
+            expect(action.type).toEqual(AuthPageActionTypes.SignUp);
+            expect({...action}).toEqual({
+                type: AuthPageActionTypes.SignUp,
+                payload
+            })
+        });
 
-	it('success sign up action', () => {
-		const action = new AuthApiActions.SignUpSuccess();
+        it('success sign up action', () => {
+            const action = new AuthApiActions.SignUpSuccess();
 
-		expect({...action}).toEqual({
-			type: AuthApiActionTypes.SignUpSuccess
-		})
+            expect({...action}).toEqual({
+                type: AuthApiActionTypes.SignUpSuccess
+            })
+        });
+
+        it('failure sign up action', () => {
+
+            const error = "Email already exists.";
+            const action = new AuthApiActions.SignUpFailure(error);
+
+            expect({...action}).toEqual({
+                type: AuthApiActionTypes.SignUpFailure,
+                payload: error
+            })
+
+        });
     });
 
-    it('failure sign up action', () => {
+    describe('Login actions', () => {
 
-		const error = "Email already exists.";
-		const action = new AuthApiActions.SignUpFailure(error);
+        it('login action', () => {
 
-		expect({...action}).toEqual({
-			type: AuthApiActionTypes.SignUpFailure,
-			payload: error
-        })
+            const payload = { email: "aldc30sc@gmail.com", password: "A12345alosada" }
+            const action = new AuthPageActions.Login(payload);
 
-	});
+            expect(action.type).toEqual(AuthPageActionTypes.Login);
+            expect({...action}).toEqual({
+                type: AuthPageActionTypes.Login,
+                payload
+            })
+        });
+
+        it('success login action', () => {
+            const action = new AuthApiActions.LoginSuccess();
+
+            expect({...action}).toEqual({
+                type: AuthApiActionTypes.LoginSuccess
+            })
+        });
+
+        it('failure login action', () => {
+
+            const error = "Wrong credentials.";
+            const action = new AuthApiActions.LoginFailure(error);
+
+            expect({...action}).toEqual({
+                type: AuthApiActionTypes.LoginFailure,
+                payload: error
+            })
+
+        });
+    });
+
+    describe('password recover actions', () => {
+
+        it('password recover action', () => {
+
+            const payload = { email: "aldc30sc@gmail.com" }
+            const action = new AuthPageActions.RecoverPassword(payload);
+
+            expect(action.type).toEqual(AuthPageActionTypes.RecoverPassword);
+            expect({...action}).toEqual({
+                type: AuthPageActionTypes.RecoverPassword,
+                payload
+            })
+        });
+
+        it('success password recover action', () => {
+            const action = new AuthApiActions.RecoverPasswordSuccess();
+
+            expect({...action}).toEqual({
+                type: AuthApiActionTypes.RecoverPasswordSuccess
+            })
+        });
+
+        it('failure password recover action', () => {
+
+            const error = "Wrong e-mail.";
+            const action = new AuthApiActions.RecoverPasswordFailure(error);
+
+            expect({...action}).toEqual({
+                type: AuthApiActionTypes.RecoverPasswordFailure,
+                payload: error
+            })
+
+        });
+    });
 });
+
+
