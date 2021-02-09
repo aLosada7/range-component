@@ -1,3 +1,17 @@
 {
+    "AUTH": {
+        "LOGIN": {
 
+        },
+        "SIGN-UP": {
+
+        }
+    },
+    "ERROR": {
+        "AUTH": {
+            "LOGIN": {
+                "EMAIL-DOES-NOT-EXISTS": "Email does not exists. Try again."
+            }
+        }
+    }
 }
