@@ -1,6 +1,6 @@
 import { AuthPageActions, AuthApiActions  } from '../actions'
 import { AuthApiActionTypes } from './auth-api.actions';
-import { AuthPageActionTypes } from './auth-page.actions';
+import { AuthPageActionTypes, EmailConfirmation } from './auth-page.actions';
 
 describe('Auth actions', () => {
     describe('Sign up actions', () => {
@@ -147,12 +147,12 @@ describe('Auth actions', () => {
 
         it('email confirmation action', () => {
 
-            const payload = { email: "aldc30sc@gmail.com" }
-            const action = new AuthPageActions.CreatePassword(payload);
+            const payload = { evldr: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFsZGMzMHNjQGdtYWlsLmNvbSIsImlhdCI6MTYxMjg2NzQyMn0.zGmwZivfIL-8QprXz9xWeWHzpIFyRiVG5PoESQO_Hqk"}
+            const action = new AuthPageActions.EmailConfirmation(payload);
 
-            expect(action.type).toEqual(AuthPageActionTypes.CreatePassword);
+            expect(action.type).toEqual(AuthPageActionTypes.EmailConfirmation);
             expect({...action}).toEqual({
-                type: AuthPageActionTypes.CreatePassword,
+                type: AuthPageActionTypes.EmailConfirmation,
                 payload
             })
         });

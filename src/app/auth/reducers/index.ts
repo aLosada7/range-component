@@ -3,7 +3,7 @@ import { ActionReducerMap, createFeatureSelector, createSelector } from '@ngrx/s
 import * as fromRoot from '../../reducers';
 import * as fromAuth from './auth.reducer';
 export interface AuthState {
-    auth: fromAuth.State,
+    auth: fromAuth.State
 }
 
 export interface State extends fromRoot.State {
@@ -17,14 +17,19 @@ export const reducers: ActionReducerMap<
     auth: fromAuth.reducer
 };
 
-export const getAuthState = createFeatureSelector<State, AuthState>('auth');
+export const selectAuthState = createFeatureSelector<State, AuthState>('auth');
 
-export const getAuthEntitiesState = createSelector(
-    getAuthState,
+export const selectAuthStatusState = createSelector(
+    selectAuthState,
     (state: AuthState) => state.auth
 );
 
+export const getLoading = createSelector(
+    selectAuthStatusState,
+    fromAuth.getLoading
+)
+
 export const getSignUpPageError = createSelector(
-    getAuthEntitiesState,
+    selectAuthStatusState,
     fromAuth.getAuthError
 );

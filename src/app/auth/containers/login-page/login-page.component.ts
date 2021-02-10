@@ -1,21 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 
 import { emailValidator } from '../../../shared/validators/email.validator';
 import { AuthPageActions } from '../../actions';
 import * as fromAuth from '../../reducers';
 
 @Component({
-  selector: 'app-login-page',
+  selector: 'tms-login-page',
   templateUrl: './login-page.component.html'
 })
 export class LoginPageComponent implements OnInit {
 
     loginForm: FormGroup;
 
+    authLoading$: Observable<boolean>;
+
     constructor(private store: Store<fromAuth.State>,
-        private fb: FormBuilder) { }
+        private fb: FormBuilder) {
+            this.authLoading$ = this.store.select(fromAuth.getLoading);
+         }
 
     ngOnInit(): void {
         this.loginForm = this.fb.group(

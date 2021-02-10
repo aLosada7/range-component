@@ -7,8 +7,6 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
 export const COMPONENTS = [
     ToolbarComponent
 ]
-
-
 @NgModule({
   declarations: [COMPONENTS],
   imports: [

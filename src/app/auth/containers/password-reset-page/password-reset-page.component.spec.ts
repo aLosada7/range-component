@@ -1,6 +1,7 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, ComponentFixtureAutoDetect, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
 import { BrowserModule, By } from '@angular/platform-browser';
 import { provideMockStore } from '@ngrx/store/testing';
 
@@ -18,7 +19,10 @@ describe('PasswordResetPageComponent', () => {
 
         TestBed.configureTestingModule({
         declarations: [ PasswordResetPageComponent ],
-        imports: [ SharedModule ],
+        imports: [
+            SharedModule,
+            RouterTestingModule.withRoutes([])
+        ],
         providers: [
             FormsModule,
             BrowserModule,

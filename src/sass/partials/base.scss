@@ -17,6 +17,10 @@ body {
     background-color: $light-grey;
 }
 
+.layout-content {
+    padding: 25px 5px 5px;
+  }
+
 .cursor {
     cursor: pointer;
 }
@@ -25,6 +29,14 @@ body {
     padding: 16px;
     display: flex;
     flex-direction: column;
+}
+
+.outer-container {
+    padding: 0 2em;
+}
+
+.inner-container {
+    padding: 0 5em;
 }
 
 .row {
@@ -39,16 +51,54 @@ body {
     }
 }
 
+// navbar
+.navbar {
+    z-index: 1;
+
+    &__items {
+        justify-content: flex-end;
+    }
+
+    &__icon {
+        padding: .25rem .75rem;
+        font-size: 1.25rem;
+        line-height: 1;
+        background-color: transparent;
+        border: 1px solid transparent;
+        border-radius: .25rem;
+        transition: box-shadow .15s ease-in-out;
+
+        &__mobile {
+            display: none;
+
+            @media only screen and (max-width: $bp-tablet) {
+                display: flex;
+            }
+        }
+    }
+}
+
 // titles
-h2 {
+h2, h3, h4 {
     margin-top: 18px;
     margin-bottom: 18px;
     font-style: normal;
     font-weight: 700;
     text-transform: uppercase;
     text-align: center;
-    font-size: 18px;
     letter-spacing: 2.3px;
+}
+
+h2 {
+    font-size: 18px;
+}
+
+h3 {
+    font-size: 18px;
+}
+
+h4 {
+    font-size: 14px;
 }
 
 // forms
@@ -65,6 +115,23 @@ label {
     line-height: 1.7;
     font-size: 14px;
     letter-spacing: 2px;
+}
+
+.btn {
+
+    &__highlight {
+        background-color: #2F7DB3;
+        color: #fff;
+        box-shadow: 0 4px 6px hsla(0, 0%, 0%, .2)
+    }
+
+    &__highlight:hover {
+        color: #fff;
+    }
+
+    &__highlight:active {
+        box-shadow: 0 1px 3px hsla(0, 0%, 0%, .2);
+    }
 }
 
 .submit .btn{
@@ -112,4 +179,9 @@ a:active, a:hover, a:link, a:visited {
 
 .backgrounded-input {
     background-color: $light-grey;
+}
+
+// loader
+tms-loading {
+    padding: 20rem;
 }

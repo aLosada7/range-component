@@ -7,7 +7,7 @@ import { AuthPageActions } from '../../actions';
 import * as fromAuth from '../../reducers';
 
 @Component({
-  selector: 'app-password-reset-page',
+  selector: 'tms-password-reset-page',
   templateUrl: './password-reset-page.component.html'
 })
 export class PasswordResetPageComponent implements OnInit {

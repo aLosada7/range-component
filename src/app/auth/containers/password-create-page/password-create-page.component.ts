@@ -7,7 +7,7 @@ import { AuthPageActions } from '../../actions';
 import * as fromAuth from '../../reducers';
 
 @Component({
-  selector: 'app-password-create-page',
+  selector: 'tms-password-create-page',
   templateUrl: './password-create-page.component.html'
 })
 export class PasswordCreatePageComponent implements OnInit {

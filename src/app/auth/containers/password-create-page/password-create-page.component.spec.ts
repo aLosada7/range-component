@@ -12,31 +12,31 @@ describe('PasswordCreatePageComponent', () => {
   let component: PasswordCreatePageComponent;
   let fixture: ComponentFixture<PasswordCreatePageComponent>;
 
-  beforeEach(async(() => {
-    const { initialState } = fromAuthReducer;
+    beforeEach(async(() => {
+        const { initialState } = fromAuthReducer;
 
-    TestBed.configureTestingModule({
-    declarations: [ PasswordCreatePageComponent ],
-    imports: [ SharedModule ],
-    providers: [
-        FormsModule,
-        BrowserModule,
-        ReactiveFormsModule,
-        provideMockStore({ initialState }),
-        { provide: ComponentFixtureAutoDetect, useValue: true }
-    ],
-    schemas: [NO_ERRORS_SCHEMA]
-    })
-    .compileComponents();
-}));
+        TestBed.configureTestingModule({
+        declarations: [ PasswordCreatePageComponent ],
+        imports: [ SharedModule ],
+        providers: [
+            FormsModule,
+            BrowserModule,
+            ReactiveFormsModule,
+            provideMockStore({ initialState }),
+            { provide: ComponentFixtureAutoDetect, useValue: true }
+        ],
+        schemas: [NO_ERRORS_SCHEMA]
+        })
+        .compileComponents();
+    }));
 
-beforeEach(() => {
-    fixture = TestBed.createComponent(PasswordCreatePageComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-});
+    beforeEach(() => {
+        fixture = TestBed.createComponent(PasswordCreatePageComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });

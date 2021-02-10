@@ -1,3 +1,6 @@
-<lwa-toolbar></lwa-toolbar>
+<tms-toolbar id="tms-toolbar" *ngIf="showNav()" [loggedIn]="loggedIn$ | async"></tms-toolbar>
 
-<router-outlet></router-outlet>
+<div class="layout-content">
+    <a *ngIf="!showNav()" [routerLink]="['']"><h2>timematters!</h2></a>
+    <router-outlet></router-outlet>
+</div>

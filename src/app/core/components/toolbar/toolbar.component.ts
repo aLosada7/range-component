@@ -1,14 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'lwa-toolbar',
+  selector: 'tms-toolbar',
   templateUrl: './toolbar.component.html'
 })
 export class ToolbarComponent implements OnInit {
 
-  constructor() { }
+    @Input() loggedIn;
 
-  ngOnInit(): void {
-  }
+    constructor() { }
+
+    ngOnInit(): void {
+    }
 
 }

@@ -1,0 +1,8 @@
+<div class="auth-options">
+    <div [ngClass]="{'active': active === 'sign-up'}" [routerLink]="['/auth', 'sign-up']">
+        <h4 class="cursor">New here?</h4>
+    </div>
+    <div [ngClass]="{'active': active === 'login'}" [routerLink]="['/auth', 'login']">
+        <h4 class="cursor">Already registered?</h4>
+    </div>
+</div>

@@ -28,6 +28,23 @@ export class AuthEffects {
       })
     );
 
+    @Effect()
+    onEmailConfirmation$ = ({ debounce = 300, scheduler = asyncScheduler } = {}): Observable<
+    Action
+    > =>
+    this.actions$.pipe(
+      ofType<AuthPageActions.EmailConfirmation>(
+        AuthPageActions.AuthPageActionTypes.EmailConfirmation
+      ),
+      debounceTime(debounce, scheduler),
+      switchMap(action => {
+        return this.authService.emailConfirmation(action.payload).pipe(
+          map(res => new AuthApiActions.EmailConfirmationSuccess()),
+          catchError(err => of(new AuthApiActions.EmailConfirmationFailure(err.error ? err.error : err)))
+        );
+      })
+    );
+
     constructor(
         private actions$: Actions,
         private authService: AuthService

@@ -8,7 +8,7 @@ import { PasswordResetPageComponent } from './containers/password-reset-page/pas
 import { SignUpPageComponent } from './containers/sign-up-page/sign-up-page.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/sign-up', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'sign-up', component: SignUpPageComponent },
   { path: 'login', component: LoginPageComponent },
   { path: 'password/reset', component: PasswordResetPageComponent },

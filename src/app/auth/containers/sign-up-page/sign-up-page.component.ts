@@ -11,7 +11,7 @@ import * as fromAuth from '../../reducers';
 import { select } from '@ngrx/store';
 
 @Component({
-  selector: 'lwa-sign-up-page',
+  selector: 'tms-sign-up-page',
   templateUrl: './sign-up-page.component.html'
 })
 export class SignUpPageComponent implements OnInit {
@@ -45,7 +45,9 @@ export class SignUpPageComponent implements OnInit {
         if (this.signUpForm.valid) {
             const user = {
                 email: this.signUpForm.get("email").value,
-                password: this.signUpForm.get("password").value
+                password: this.signUpForm.get("password").value,
+                name: this.signUpForm.get("name").value,
+                lastName: this.signUpForm.get("surnames").value,
             }
             this.store.dispatch(new AuthPageActions.SignUp(user));
         }

@@ -13,9 +13,10 @@ import { StoreModule } from '@ngrx/store';
 import { PasswordResetPageComponent } from './containers/password-reset-page/password-reset-page.component';
 import { EmailVerificationPageComponent } from './containers/email-verification-page/email-verification-page.component';
 import { PasswordCreatePageComponent } from './containers/password-create-page/password-create-page.component';
+import { AuthOptionsComponent } from './components/auth-options/auth-options.component';
 
 @NgModule({
-  declarations: [SignUpPageComponent, UserDataComponent, LoginPageComponent, PasswordResetPageComponent, EmailVerificationPageComponent, PasswordCreatePageComponent],
+  declarations: [SignUpPageComponent, UserDataComponent, LoginPageComponent, PasswordResetPageComponent, EmailVerificationPageComponent, PasswordCreatePageComponent, AuthOptionsComponent],
   imports: [
     SharedModule,
     AuthRoutingModule,

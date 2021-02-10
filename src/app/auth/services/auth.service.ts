@@ -10,5 +10,9 @@ export class AuthService {
         return this.http.post('http://localhost:5000/v1/auth/register', payload);
     }
 
+    emailConfirmation(validationToken: string) {
+        return this.http.post(`http://localhost:5000/v1/auth/confirmRegister?evldr=${validationToken}`, {});
+    }
+
   constructor(private http: HttpClient) { }
 }
