@@ -8,9 +8,15 @@
         }
     },
     "ERROR": {
+        "SOMETHING-WENT-WRONG": "Something went wrong. Please, try again!",
+        "EMAIL-NOT-SENT": "Email could not be sent",
         "AUTH": {
             "LOGIN": {
                 "EMAIL-DOES-NOT-EXISTS": "Email does not exists. Try again."
+            },
+            "REGISTER": {
+                "EMAIL-ALREADY-EXISTS": "Email already exists",
+                "ERROR-OCURRED": "Some error ocurred registering the new user"
             }
         }
     }

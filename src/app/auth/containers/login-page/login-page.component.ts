@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { emailValidator } from '../../../shared/validators/email.validator';
@@ -15,7 +15,8 @@ export class LoginPageComponent implements OnInit {
 
     loginForm: FormGroup;
 
-    authLoading$: Observable<boolean>;
+    authLoading$ = this.store.pipe(select(fromAuth.getLoading));
+    error$ = this.store.pipe(select(fromAuth.getSignUpPageError));
 
     constructor(private store: Store<fromAuth.State>,
         private fb: FormBuilder) {

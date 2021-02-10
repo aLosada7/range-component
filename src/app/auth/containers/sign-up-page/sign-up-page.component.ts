@@ -15,12 +15,14 @@ import { select } from '@ngrx/store';
   templateUrl: './sign-up-page.component.html'
 })
 export class SignUpPageComponent implements OnInit {
-    error$ = this.store.pipe(select(fromAuth.getSignUpPageError));
 
     signUpForm: FormGroup;
 
     steps: string[] = ["Choose your plan", "Your information", "Confirm your register"];
     actualStep: number = 1;
+
+    authLoading$ = this.store.pipe(select(fromAuth.getLoading));
+    error$ = this.store.pipe(select(fromAuth.getSignUpPageError));
 
     constructor(
         private store: Store<fromAuth.State>,

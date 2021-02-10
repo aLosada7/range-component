@@ -1,10 +1,10 @@
 <div class="container sign-in-container">
     <div class="card">
-        <div class="card-body" *ngIf="!authLoading$ |async else loading">
+        <div class="card-body" *ngIf="!(authLoading$ | async) else loading">
             <tms-auth-options [active]="'login'"></tms-auth-options>
             <form id="login-form" [formGroup]="loginForm" (ngSubmit)="login()">
                 <h3>SIGN IN WITH EMAIL</h3>
-                <!--<div *ngIf="error$ | async" id="authError"><p>{{ error$ | async }}</p></div>-->
+                <div *ngIf="error$ | async" class="alert alert-danger" role="alert">{{ (error$ | async) | translate }}</div>
                 <fieldset>
                     <div class="field">
                         <label for="email" class="form-label">Email address:</label>

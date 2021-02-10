@@ -1,10 +1,10 @@
 <div class="container sign-up-container">
     <div class="card">
-        <div class="card-body">
+        <div class="card-body" *ngIf="!(authLoading$ | async) else loading">
             <tms-auth-options [active]="'sign-up'"></tms-auth-options>
             <form id="sign-up-form" [formGroup]="signUpForm" (ngSubmit)="signUp()">
                 <h3>SIGN UP WITH EMAIL</h3>
-                <div *ngIf="error$ | async" id="authError"><p>{{ error$ | async }}</p></div>
+                <div *ngIf="error$ | async" class="alert alert-danger" role="alert">{{ (error$ | async) | translate }}</div>
                 <fieldset>
                     <div class="field">
                         <label for="email" class="form-label form-control-lg">Email address:</label>
@@ -48,5 +48,8 @@
                 </fieldset>
             </form>
         </div>
+        <ng-template #loading>
+            <tms-loading class="loader"></tms-loading>
+        </ng-template>
     </div>
 </div>

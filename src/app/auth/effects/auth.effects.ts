@@ -23,7 +23,7 @@ export class AuthEffects {
       switchMap(action => {
         return this.authService.signUp(action.payload).pipe(
           map(res => new AuthApiActions.SignUpSuccess()),
-          catchError(err => of(new AuthApiActions.SignUpFailure(err.error ? err.error : err)))
+          catchError(err => of(new AuthApiActions.SignUpFailure(err.error ? err.error.error : err)))
         );
       })
     );

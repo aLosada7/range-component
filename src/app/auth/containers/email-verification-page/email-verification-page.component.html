@@ -13,7 +13,7 @@
                 </fieldset>
             </ng-container>
             <ng-container *ngIf="error$ | async">
-                <h3>There has been an error</h3>
+                <h3>{{ 'ERROR.SOMETHING-WENT-WRONG' | translate }}</h3>
             </ng-container>
         </div>
         <ng-template #loading>
