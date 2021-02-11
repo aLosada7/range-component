@@ -1,10 +1,36 @@
 {
+    "IDENTITY": {
+        "LOGIN": "Sign In With Email",
+        "SIGNUP": "Sign Up With Email",
+        "EMAILVERIFICATION": "Email Verification",
+        "FORGOTPASSWORD": "Recover password",
+        "CREATEPASSWORD": "Choose a new password"
+    },
     "AUTH": {
-        "LOGIN": {
-
+        "EMAIL": "Email address",
+        "PASSWORD": "Password",
+        "REPEATED-PASSWORD": "Repeated password",
+        "NAME": "Name",
+        "SURNAMES": "Surnames",
+        "AUTH-COMPLETE": "Auth complete",
+        "WELCOME-MESSAGE": "Welcome to TimeMatters! You are now a new member of our community. We are proud to have you with us.",
+        "OPTIONS": {
+            "SIGN-UP": "New here?",
+            "LOGIN": "Already registered?"
         },
-        "SIGN-UP": {
-
+        "FORM": {
+          "LOGIN": "Sign In",
+          "SIGN-UP": "Sign Up",
+          "NEW-PASSWORD": "Recover password",
+          "GO-TO-MAIN": "Go to welcome page!"
+        },
+        "INFO": {
+            "SIGNUP-EMAIL-CONFIRMATION": "We will send an e-mail confirmation here.",
+            "EMAIL-NOT-VALID": "Email is not valid.",
+            "NAME-REQUIRED": "Your name is required.",
+            "SURNAMES-REQUIRED": "Your surnames are required.",
+            "PASSWORD-REQUIREMENTS": "Password does not meet the requirements.",
+            "NO-PASSWORD-MATCH": "Passwords are not equal."
         }
     },
     "ERROR": {
@@ -17,6 +43,9 @@
             "REGISTER": {
                 "EMAIL-ALREADY-EXISTS": "Email already exists",
                 "ERROR-OCURRED": "Some error ocurred registering the new user"
+            },
+            "FORGOT-PASSWORD": {
+                "EMAIL-DOES-NOT-EXISTS": "Email does not exists."
             }
         }
     }

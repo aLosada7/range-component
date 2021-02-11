@@ -27,7 +27,12 @@ export const selectAuthStatusState = createSelector(
 export const getLoading = createSelector(
     selectAuthStatusState,
     fromAuth.getLoading
-)
+);
+
+export const getAuthResult = createSelector(
+    selectAuthStatusState,
+    fromAuth.getAuthResult
+);
 
 export const getSignUpPageError = createSelector(
     selectAuthStatusState,

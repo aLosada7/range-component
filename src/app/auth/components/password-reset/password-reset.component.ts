@@ -1,21 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Store } from '@ngrx/store';
 
 import { emailValidator } from '../../../shared/validators/email.validator';
-import { AuthPageActions } from '../../actions';
-import * as fromAuth from '../../reducers';
 
 @Component({
-  selector: 'tms-password-reset-page',
-  templateUrl: './password-reset-page.component.html'
+  selector: 'tms-password-reset',
+  templateUrl: './password-reset.component.html'
 })
-export class PasswordResetPageComponent implements OnInit {
+export class PasswordResetComponent implements OnInit {
+
+    @Input() authResult;
+
+    @Output() submitted;
 
     passwordResetForm: FormGroup;
 
-    constructor(private store: Store<fromAuth.State>,
-        private fb: FormBuilder) { }
+    constructor(private fb: FormBuilder) {
+            // Initialize
+            this.submitted = new EventEmitter();
+        }
 
     ngOnInit(): void {
         this.passwordResetForm = this.fb.group(
@@ -30,7 +33,7 @@ export class PasswordResetPageComponent implements OnInit {
             const user = {
                 email: this.passwordResetForm.get("email").value
             }
-            this.store.dispatch(new AuthPageActions.RecoverPassword(user));
+            this.submitted.emit(user);
         }
     }
 

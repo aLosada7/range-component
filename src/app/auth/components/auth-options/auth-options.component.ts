@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Identity } from './../../models/identity.enum';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'tms-auth-options',
@@ -8,9 +9,9 @@ export class AuthOptionsComponent implements OnInit {
 
     @Input() active;
 
-  constructor() { }
+    constructor() {}
 
-  ngOnInit(): void {
-  }
+    ngOnInit(): void {
+    }
 
 }

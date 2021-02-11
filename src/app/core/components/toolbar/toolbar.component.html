@@ -14,7 +14,7 @@
                     <a class="nav-link" [routerLink]="['auth']">Sign In</a>
                 </li>
                 <li *ngIf="!loggedIn" class="nav-item">
-                    <button class="btn btn__highlight" [routerLink]="['auth','sign-up']">Sign Up</button>
+                    <button class="btn btn__highlight" [routerLink]="['auth','signup']">Sign Up</button>
                 </li>
                 <li *ngIf="loggedIn" class="nav-item">
                     <a class="nav-link" href="#">My account</a>

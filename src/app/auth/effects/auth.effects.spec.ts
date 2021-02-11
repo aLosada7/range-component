@@ -1,7 +1,5 @@
-import { EmailConfirmation } from './../actions/auth-page.actions';
-import { asyncScheduler, Observable, ReplaySubject, throwError } from 'rxjs';
+import { asyncScheduler, ReplaySubject, throwError } from 'rxjs';
 import { provideMockActions } from '@ngrx/effects/testing';
-import { Action } from '@ngrx/store';
 import { TestBed } from '@angular/core/testing';
 import { of } from 'rxjs/internal/observable/of';
 
@@ -9,10 +7,15 @@ import { AuthEffects } from './auth.effects';
 import { AuthService } from './../services/auth.service';
 import { AuthPageActionTypes } from '../actions/auth-page.actions';
 import { AuthPageActions } from '../actions';
+import { RouterTestingModule } from '@angular/router/testing';
 
 const authService = {
     signUp: jest.fn(),
-    emailConfirmation: jest.fn()
+    login: jest.fn(),
+    emailConfirmation: jest.fn(),
+    recoverPassword: jest.fn(),
+    createNewPassword: jest.fn()
+
 }
 
 describe('Auth actions', () => {
@@ -22,11 +25,15 @@ describe('Auth actions', () => {
     const payload = {
         email: "aldc30sc@gmail.com",
         password: "A12345alosada",
-        evldr: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFsZGMzMHNjQGdtYWlsLmNvbSIsImlhdCI6MTYxMjg2NzQyMn0.zGmwZivfIL-8QprXz9xWeWHzpIFyRiVG5PoESQO_Hqk"
+        evldr: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFsZGMzMHNjQGdtYWlsLmNvbSIsImlhdCI6MTYxMjg2NzQyMn0.zGmwZivfIL-8QprXz9xWeWHzpIFyRiVG5PoESQO_Hqk",
+        pvldr: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFsZGMzMHNjQGdtYWlsLmNvbSIsImlhdCI6MTYxMjg2NzQyMn0.zGmwZivfIL-8QprXz9xWeWHzpIFyRiVG5PoESQO_Hqk"
     }
 
     beforeEach(() => {
 		TestBed.configureTestingModule({
+            imports: [
+                RouterTestingModule.withRoutes([]),
+            ],
 			providers: [
                 AuthEffects,
                 provideMockActions(() => actions$),
@@ -58,7 +65,7 @@ describe('Auth actions', () => {
     it('should return an SIGN_UP_FAILURE action', async done => {
         const error = 'Wrong credentials introduced';
 
-        authService.signUp.mockReturnValue(throwError({ error }));
+        authService.signUp.mockReturnValue(throwError(error));
 
         actions$ = new ReplaySubject(1);
         actions$.next(new AuthPageActions.SignUp(payload));
@@ -77,6 +84,24 @@ describe('Auth actions', () => {
 
     it('should return an EMAIL_CONFIRMATION_SUCCESS action', async done => {
 
+        authService.login.mockReturnValue(of({}));
+
+        actions$ = new ReplaySubject(1);
+        actions$.next(new AuthPageActions.Login(payload));
+
+        authEffects.onLogin$({
+            debounce: 300,
+            scheduler: asyncScheduler,
+        }).subscribe(action => {
+            expect(action).toEqual({
+              type: '[Auth/API] Login Success'
+            });
+            done();
+        });
+    });
+
+    it('should return an EMAIL_CONFIRMATION_SUCCESS action', async done => {
+
         authService.emailConfirmation.mockReturnValue(of({}));
 
         actions$ = new ReplaySubject(1);
@@ -88,6 +113,42 @@ describe('Auth actions', () => {
         }).subscribe(action => {
             expect(action).toEqual({
               type: '[Auth/API] Email Confirmation Success'
+            });
+            done();
+        });
+    });
+
+    it('should return an RECOVER_PASSWORD_SUCCESS action', async done => {
+
+        authService.recoverPassword.mockReturnValue(of({}));
+
+        actions$ = new ReplaySubject(1);
+        actions$.next(new AuthPageActions.RecoverPassword(payload));
+
+        authEffects.onRecoverPassword$({
+            debounce: 300,
+            scheduler: asyncScheduler,
+        }).subscribe(action => {
+            expect(action).toEqual({
+              type: '[Auth/API] Recover Password Success'
+            });
+            done();
+        });
+    });
+
+    it('should return an CREATE_PASSWORD_SUCCESS action', async done => {
+
+        authService.createNewPassword.mockReturnValue(of({}));
+
+        actions$ = new ReplaySubject(1);
+        actions$.next(new AuthPageActions.CreatePassword(payload));
+
+        authEffects.onCreatePassword$({
+            debounce: 300,
+            scheduler: asyncScheduler,
+        }).subscribe(action => {
+            expect(action).toEqual({
+              type: '[Auth/API] Create Password Success'
             });
             done();
         });

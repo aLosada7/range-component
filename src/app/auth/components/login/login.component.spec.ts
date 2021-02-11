@@ -8,19 +8,21 @@ import { provideMockStore } from '@ngrx/store/testing';
 
 import { SharedModule } from 'src/app/shared/shared.module';
 import * as fromAuthReducer from '../../reducers/auth.reducer';
-import { PasswordResetPageComponent } from './password-reset-page.component';
+import { LoginComponent } from './login.component';
+import { TranslateTestingModule } from 'src/app/testing/translate-testing.module';
 
-describe('PasswordResetPageComponent', () => {
-  let component: PasswordResetPageComponent;
-    let fixture: ComponentFixture<PasswordResetPageComponent>;
+describe('LoginPageComponent', () => {
+  let component: LoginComponent;
+  let fixture: ComponentFixture<LoginComponent>;
 
-    beforeEach(async(() => {
-        const { initialState } = fromAuthReducer;
+  beforeEach(async(() => {
+    const { initialState } = fromAuthReducer;
 
-        TestBed.configureTestingModule({
-        declarations: [ PasswordResetPageComponent ],
+    TestBed.configureTestingModule({
+        declarations: [ LoginComponent ],
         imports: [
             SharedModule,
+            TranslateTestingModule,
             RouterTestingModule.withRoutes([])
         ],
         providers: [
@@ -31,12 +33,12 @@ describe('PasswordResetPageComponent', () => {
             { provide: ComponentFixtureAutoDetect, useValue: true }
         ],
         schemas: [NO_ERRORS_SCHEMA]
-        })
-        .compileComponents();
-    }));
+    })
+    .compileComponents();
+  }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(PasswordResetPageComponent);
+        fixture = TestBed.createComponent(LoginComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });
@@ -46,16 +48,17 @@ describe('PasswordResetPageComponent', () => {
     });
 
     it('valid form', () => {
-        component.passwordResetForm.controls['email'].setValue("hey");
-        expect(component.passwordResetForm.valid).toBeFalsy();
-        component.passwordResetForm.controls['email'].setValue("aldc30sc@gmail.com");
-        expect(component.passwordResetForm.valid).toBeTruthy();
+        component.loginForm.controls['email'].setValue("alos@gmail.com");
+        component.loginForm.controls['password'].setValue("");
+        expect(component.loginForm.valid).toBeFalsy();
+        component.loginForm.controls['password'].setValue("A123alvaro");
+        expect(component.loginForm.valid).toBeTruthy();
     });
 
     it('method launched when form submitted', () => {
-        jest.spyOn(component, 'passwordReset')
-        fixture.debugElement.query(By.css('#reset-form')).triggerEventHandler('submit', null);
+        jest.spyOn(component, 'login')
+        fixture.debugElement.query(By.css('#login-form')).triggerEventHandler('submit', null);
 
-        expect(component.passwordReset).toHaveBeenCalled()
+        expect(component.login).toHaveBeenCalled()
     });
 });

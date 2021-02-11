@@ -4,14 +4,14 @@ import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { By, BrowserModule } from '@angular/platform-browser';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 
-import { SignUpPageComponent } from './sign-up-page.component';
+import { SignUpComponent } from './sign-up.component';
 import * as fromAuthReducer from '../../reducers/auth.reducer';
-import { SharedModule } from './../../../shared/shared.module';
+import { SharedModule } from '../../../shared/shared.module';
 import { getSignUpPageError } from '../../reducers';
+import { TranslateTestingModule } from 'src/app/testing/translate-testing.module';
 
-let component: SignUpPageComponent;
-let fixture: ComponentFixture<SignUpPageComponent>;
-let button;
+let component: SignUpComponent;
+let fixture: ComponentFixture<SignUpComponent>;
 
 describe('SignUpPageComponent', () => {
     let h2: HTMLElement;
@@ -21,8 +21,8 @@ describe('SignUpPageComponent', () => {
         const { initialState } = fromAuthReducer;
 
 		TestBed.configureTestingModule({
-			declarations: [ SignUpPageComponent ],
-			imports: [ SharedModule ],
+			declarations: [ SignUpComponent ],
+			imports: [ SharedModule, TranslateTestingModule ],
 			providers: [
 				FormsModule,
 				BrowserModule,
@@ -40,7 +40,7 @@ describe('SignUpPageComponent', () => {
 	}));
 
 	beforeEach(() => {
-		fixture = TestBed.createComponent(SignUpPageComponent);
+		fixture = TestBed.createComponent(SignUpComponent);
         component = fixture.componentInstance;
 
         component.ngOnInit();

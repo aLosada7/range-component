@@ -18,14 +18,12 @@ export const COMPONENTS = [
     CommonModule,
     TranslateModule,
     RouterModule,
-    MaterialModule,
     ReactiveFormsModule
   ],
   exports: [
     CommonModule,
     TranslateModule,
     RouterModule,
-    MaterialModule,
     ReactiveFormsModule,
     COMPONENTS
   ]

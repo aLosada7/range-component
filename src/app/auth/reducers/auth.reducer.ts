@@ -1,14 +1,14 @@
 import { AuthPageActions, AuthApiActions } from '../actions';
 
 export interface State {
-    user: any | null;
     loading: boolean;
+    success: boolean;
     error: string;
 }
 
 export const initialState: State = {
-    user: "hey",
     loading: false,
+    success: false,
     error: null
 };
 
@@ -25,6 +25,7 @@ export function reducer(
             return {
                 ...state,
                 loading: true,
+                success: false
             };
         }
 
@@ -36,6 +37,7 @@ export function reducer(
             return {
                 ...state,
                 loading: false,
+                success: true
             };
         }
 
@@ -58,4 +60,5 @@ export function reducer(
 }
 
 export const getLoading = (state: State) => state.loading;
+export const getAuthResult = (state: State) => state.success;
 export const getAuthError = (state: State) => state.error;

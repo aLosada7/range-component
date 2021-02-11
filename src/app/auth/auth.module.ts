@@ -1,22 +1,23 @@
-import { LoginPageComponent } from './containers/login-page/login-page.component';
 import { NgModule } from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
 
 import { SharedModule } from '../shared';
 import { AuthRoutingModule } from './auth-routing.module';
-import { SignUpPageComponent } from './containers/sign-up-page/sign-up-page.component';
-
+import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { AuthEffects } from './effects/auth.effects';
-import { UserDataComponent } from './components/user-data/user-data.component';
 import { reducers } from './reducers';
 import { StoreModule } from '@ngrx/store';
-import { PasswordResetPageComponent } from './containers/password-reset-page/password-reset-page.component';
-import { EmailVerificationPageComponent } from './containers/email-verification-page/email-verification-page.component';
-import { PasswordCreatePageComponent } from './containers/password-create-page/password-create-page.component';
+import { PasswordResetComponent } from './components/password-reset/password-reset.component';
+import { EmailVerificationComponent } from './components/email-verification/email-verification.component';
+import { PasswordCreateComponent } from './components/password-create/password-create.component';
 import { AuthOptionsComponent } from './components/auth-options/auth-options.component';
+import { AuthPageComponent } from './containers/auth-page/auth-page.component';
+import { LoginComponent } from './components/login/login.component';
+
+export const COMPONENTS = [SignUpComponent, LoginComponent, PasswordResetComponent, EmailVerificationComponent, PasswordCreateComponent, AuthOptionsComponent, AuthPageComponent];
 
 @NgModule({
-  declarations: [SignUpPageComponent, UserDataComponent, LoginPageComponent, PasswordResetPageComponent, EmailVerificationPageComponent, PasswordCreatePageComponent, AuthOptionsComponent],
+  declarations: [COMPONENTS],
   imports: [
     SharedModule,
     AuthRoutingModule,
