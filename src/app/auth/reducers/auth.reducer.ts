@@ -25,6 +25,7 @@ export function reducer(
             return {
                 ...state,
                 loading: true,
+                error: null,
                 success: false
             };
         }

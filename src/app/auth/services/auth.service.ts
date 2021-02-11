@@ -23,7 +23,7 @@ export class AuthService {
     }
 
     createNewPassword(payload: any) {
-        return this.http.post(`http://localhost:5000/v1/auth/updateForgottenPassword?evldr=${payload.newPasswordToken}`, payload.password);
+        return this.http.post(`http://localhost:5000/v1/auth/updateForgottenPassword?pvldr=${payload.newPasswordToken}`, { password: payload.password});
     }
 
   constructor(private http: HttpClient) { }

@@ -62,7 +62,7 @@ export class AuthPageComponent implements OnInit, OnDestroy {
                 break;
             }
             case Identity.CreatePassword: {
-                this.store.dispatch(new AuthPageActions.CreatePassword({...form, ...this.params['pvldr']}));
+                this.store.dispatch(new AuthPageActions.CreatePassword({...form, newPasswordToken: this.params['pvldr']}));
                 break;
             }
         }
