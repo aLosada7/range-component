@@ -12,11 +12,15 @@ export function reducer(
     state: State = initialState,
     action: UserActions.UserActionsUnion
     ): State {
-        /*switch (action.type) {
-
+        switch (action.type) {
+            case UserActions.UserActionTypes.LoadUser:
+                return {
+                    ...state,
+                    user: action.payload.user
+                }
             default:
-            return state;
-        }*/
+                return state;
+        }
         return state;
 }
 

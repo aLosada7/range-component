@@ -1,29 +1,35 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { async, ComponentFixture, ComponentFixtureAutoDetect, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, ComponentFixtureAutoDetect, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { BrowserModule, By } from '@angular/platform-browser';
 import { provideMockStore } from '@ngrx/store/testing';
-
+import { Router, Routes } from '@angular/router';
 
 import { SharedModule } from 'src/app/shared/shared.module';
 import * as fromAuthReducer from '../../reducers/auth.reducer';
 import { LoginComponent } from './login.component';
 import { TranslateTestingModule } from 'src/app/testing/translate-testing.module';
+import { AuthPageComponent } from '../../containers/auth-page/auth-page.component';
 
 describe('LoginPageComponent', () => {
-  let component: LoginComponent;
-  let fixture: ComponentFixture<LoginComponent>;
+    let component: LoginComponent;
+    let fixture: ComponentFixture<LoginComponent>;
+    let router: Router;
+
+    const routes = [
+        { path: 'identity/:identity', component: AuthPageComponent }
+    ] as Routes;
 
   beforeEach(async(() => {
     const { initialState } = fromAuthReducer;
 
     TestBed.configureTestingModule({
-        declarations: [ LoginComponent ],
+        declarations: [ LoginComponent, AuthPageComponent ],
         imports: [
             SharedModule,
             TranslateTestingModule,
-            RouterTestingModule.withRoutes([])
+            RouterTestingModule.withRoutes(routes)
         ],
         providers: [
             FormsModule,
@@ -38,6 +44,7 @@ describe('LoginPageComponent', () => {
   }));
 
     beforeEach(() => {
+        router = TestBed.inject(Router);
         fixture = TestBed.createComponent(LoginComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
@@ -61,4 +68,11 @@ describe('LoginPageComponent', () => {
 
         expect(component.login).toHaveBeenCalled()
     });
+
+    it('should navigate to forget password', fakeAsync(() => {
+        fixture.debugElement.query(By.css('.forgotten-password__link')).nativeElement.click();
+        tick();
+
+        expect(router.url).toBe('/identity/forgotpassword');
+    }));
 });

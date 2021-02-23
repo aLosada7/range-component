@@ -1,4 +1,5 @@
 import { Action } from '@ngrx/store';
+import { User } from '../models/User';
 
 export enum AuthApiActionTypes {
   SignUpSuccess = '[Auth/API] Sign Up Success',
@@ -11,6 +12,8 @@ export enum AuthApiActionTypes {
   CreatePasswordFailure = '[Auth/API] Create Password Failure',
   EmailConfirmationSuccess = '[Auth/API] Email Confirmation Success',
   EmailConfirmationFailure = '[Auth/API] Email Confirmation Failure',
+  LoadUserSuccess = '[Auth/API] Load User Success',
+  LoadUserFailure = '[Auth/API] Load User Failure',
 }
 
 export class SignUpSuccess implements Action {
@@ -73,6 +76,18 @@ export class EmailConfirmationFailure implements Action {
     constructor(public payload: { error: any }) {}
 }
 
+export class LoadUserSuccess implements Action {
+    type = AuthApiActionTypes.LoadUserSuccess;
+
+    constructor(public payload: User) {}
+  }
+
+export class LoadUserFailure implements Action {
+    readonly type = AuthApiActionTypes.LoadUserFailure;
+
+    constructor(public payload: { error: any }) {}
+}
+
 export type AuthApiActionsUnion =
 SignUpSuccess |
 SignUpFailure |
@@ -83,4 +98,6 @@ RecoverPasswordFailure |
 CreatePasswordSuccess |
 CreatePasswordFailure |
 EmailConfirmationSuccess |
-EmailConfirmationFailure
+EmailConfirmationFailure |
+LoadUserSuccess |
+LoadUserFailure

@@ -30,6 +30,6 @@ export class AppComponent implements OnInit{
     }
 
     showNav(): boolean {
-        return !this.router.url.includes("auth");
+        return !this.router.url.includes("identity");
     }
 }

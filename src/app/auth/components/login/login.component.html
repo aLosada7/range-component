@@ -13,7 +13,7 @@
             <button type="submit" class="btn">{{ 'AUTH.FORM.LOGIN' | translate }}</button>
         </div>
         <div class="forgotten-password">
-            <a [routerLink]="['/auth', 'forgotpassword']">{{ 'AUTH.FORGOT-PASSWORD' | translate }}</a>
+            <a [routerLink]="['/identity', 'forgotpassword']" class="forgotten-password__link">{{ 'AUTH.FORGOT-PASSWORD' | translate }}</a>
         </div>
     </fieldset>
 </form>

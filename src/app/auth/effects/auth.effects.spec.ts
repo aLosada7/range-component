@@ -2,12 +2,14 @@ import { asyncScheduler, ReplaySubject, throwError } from 'rxjs';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { TestBed } from '@angular/core/testing';
 import { of } from 'rxjs/internal/observable/of';
+import { RouterTestingModule } from '@angular/router/testing';
+import { HttpClientModule } from '@angular/common/http';
+import { provideMockStore } from '@ngrx/store/testing';
 
 import { AuthEffects } from './auth.effects';
 import { AuthService } from './../services/auth.service';
-import { AuthPageActionTypes } from '../actions/auth-page.actions';
 import { AuthPageActions } from '../actions';
-import { RouterTestingModule } from '@angular/router/testing';
+import * as fromAuthReducer from '../reducers/auth.reducer';
 
 const authService = {
     signUp: jest.fn(),
@@ -15,11 +17,10 @@ const authService = {
     emailConfirmation: jest.fn(),
     recoverPassword: jest.fn(),
     createNewPassword: jest.fn()
-
 }
 
 describe('Auth actions', () => {
-
+    const { initialState } = fromAuthReducer;
     let actions$;
     let authEffects;
     const payload = {
@@ -33,10 +34,12 @@ describe('Auth actions', () => {
 		TestBed.configureTestingModule({
             imports: [
                 RouterTestingModule.withRoutes([]),
+                HttpClientModule
             ],
 			providers: [
                 AuthEffects,
                 provideMockActions(() => actions$),
+                provideMockStore({ initialState }),
                 { provide: AuthService, useValue: authService }
 			]
 		})

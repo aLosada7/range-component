@@ -1,7 +1,13 @@
 import { Action } from '@ngrx/store';
 
-export enum UserActions {
+export enum UserActionTypes {
+    LoadUser = 'LOAD_USER'
 }
 
+export class LoadUser implements Action {
+    type = UserActionTypes.LoadUser;
 
-export type UserActionsUnion = undefined;
+    constructor(public payload?: any) {}
+}
+
+export type UserActionsUnion = LoadUser;

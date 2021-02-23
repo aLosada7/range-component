@@ -7,6 +7,7 @@
     "build": "ng build",
     "test": "npx jest --detectOpenHandles",
     "test:watch": "npx jest --watch --detectOpenHandles",
+    "test:coverage": "npx jest --coverage --detectOpenHandles",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },

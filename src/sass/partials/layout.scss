@@ -1,0 +1,50 @@
+.logo-company {
+    color: #fff;
+}
+
+.auth-logo {
+    color: $primary-color;
+}
+
+//navbar
+.navbar {
+    z-index: 1;
+    background-color: $secondary-color;
+
+    &__items {
+        justify-content: flex-end;
+    }
+
+    &__icon {
+        padding: .25rem .75rem;
+        font-size: 1.25rem;
+        line-height: 1;
+        background-color: transparent;
+        border: 1px solid transparent;
+        border-radius: .25rem;
+        transition: box-shadow .15s ease-in-out;
+
+        &__mobile {
+            display: none;
+
+            @media only screen and (max-width: $bp-tablet) {
+                display: flex;
+            }
+        }
+    }
+}
+
+.nav-link, .navbar__icon__mobile {
+    color: $light-grey;
+}
+
+.nav-link:hover {
+    color: #fff;
+}
+
+.s-header {
+    min-height: 900px;
+    height: 100vh;
+    padding-top: 0;
+    margin-top: -73px;
+}

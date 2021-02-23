@@ -43,7 +43,6 @@ export class AuthPageComponent implements OnInit, OnDestroy {
     }
 
     submitted(type: Identity, form: any) {
-        console.log(type);
         switch (type) {
             case Identity.Login: {
                 this.store.dispatch(new AuthPageActions.Login(form));
