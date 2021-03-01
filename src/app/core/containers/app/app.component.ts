@@ -1,3 +1,4 @@
+import { MasterService } from './../../services/master.service';
 import { Component, OnInit } from '@angular/core';
 import { select } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
@@ -7,6 +8,7 @@ import * as fromRoot from '../../../reducers';
 import * as fromAuth from '../../../auth/reducers';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'tms-app',
@@ -21,15 +23,25 @@ export class AppComponent implements OnInit{
     constructor(
         private store: Store<fromRoot.State>,
         private router: Router,
-        private translate: TranslateService) {
-        this.loggedIn$ = this.store.pipe(select(fromRoot.getLoggedIn));
+        private translate: TranslateService,
+        private masterService: MasterService) {
     }
 
     ngOnInit() {
         this.translate.setDefaultLang('en');
+
+        this.loadInitialData();
     }
 
     showNav(): boolean {
         return !this.router.url.includes("identity");
     }
+
+    private loadInitialData() {
+        this.store.pipe(
+          take(1),
+        ).subscribe(state => {
+          this.masterService.dispatchMasterActions();
+        });
+      }
 }

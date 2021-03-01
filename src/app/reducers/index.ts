@@ -7,7 +7,7 @@ import {
 } from '@ngrx/store';
 import { environment } from '../../environments/environment';
 import * as fromRouter from '@ngrx/router-store';
-import * as fromUser from '../core/reducers/user.reducer';
+import * as fromMasters from '../core/reducers/masters.reducer';
 
 /**
  * storeFreeze prevents state from being mutated. When mutation occurs, an
@@ -22,7 +22,7 @@ import { storeFreeze } from 'ngrx-store-freeze';
  */
 export interface State {
     router: fromRouter.RouterReducerState;
-    user: fromUser.State;
+    masters: fromMasters.State;
 }
 
 /**
@@ -32,7 +32,7 @@ export interface State {
  */
 export const reducers: ActionReducerMap<State> = {
     router: fromRouter.routerReducer,
-    user: fromUser.reducer
+    masters: fromMasters.reducer
 };
 
 export function logger(reducer: ActionReducer<State>): ActionReducer<State> {
@@ -54,9 +54,8 @@ export const metaReducers: MetaReducer<State>[] = !environment.production
   ? [logger, storeFreeze]
   : [];
 
-export const getUserState = createFeatureSelector<State, fromUser.State>(
-'user'
+export const getMasterState = createFeatureSelector<State, fromMasters.State>(
+'masters'
 );
 
-export const getUser = createSelector(getUserState, fromUser.getUser);
-export const getLoggedIn = createSelector(getUser, user => !!user);
+export const getCategories = createSelector(getMasterState, fromMasters.getCategories);

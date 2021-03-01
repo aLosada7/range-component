@@ -1,5 +1,5 @@
-import * as UserActions from './user.actions';
+import * as MasterActions from './master.actions';
 
 export {
-    UserActions
+    MasterActions
 };

@@ -56,7 +56,7 @@ export class AuthEffects {
     );
 
     @Effect()
-    onLoadUser$ = ({}): Observable<
+    onLoadUser$ = (): Observable<
     Action
     > =>
     this.actions$.pipe(
