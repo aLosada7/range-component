@@ -8,6 +8,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 
 import { DashboardPageComponent } from './dashboard-page.component';
 import { doesNotReject } from 'assert';
+import { MenuComponent } from '../../components/menu/menu.component';
 
 let component: DashboardPageComponent;
 let fixture: ComponentFixture<DashboardPageComponent>;
@@ -25,7 +26,7 @@ describe('DashboardPageComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [ DashboardPageComponent ],
+            declarations: [ DashboardPageComponent, MenuComponent ],
             imports: [
                 SharedModule,
 

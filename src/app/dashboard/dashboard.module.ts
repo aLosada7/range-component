@@ -3,13 +3,15 @@ import { DashboardPageComponent } from './containers/dashboard-page/dashboard-pa
 import { SharedModule } from './../shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MenuComponent } from './components/menu/menu.component';
 
 export const COMPONENTS = [
-    DashboardPageComponent
+    DashboardPageComponent,
+    MenuComponent
 ]
 
 @NgModule({
-    declarations: [COMPONENTS],
+    declarations: [COMPONENTS, MenuComponent],
     imports: [
         SharedModule,
         DashboardRouting

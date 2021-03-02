@@ -1,10 +1,11 @@
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, ParamMap, Params } from '@angular/router';
 
 import { Category } from 'src/app/core/models/category.model';
 import { Subcategory } from 'src/app/core/models/subcategory.model';
 import { map, take } from 'rxjs/operators';
+import { MenuComponent } from '../../components/menu/menu.component';
 
 export interface SelectedCategory {
     category: number;
@@ -15,7 +16,10 @@ export interface SelectedCategory {
   selector: 'tms-dashboard-page',
   templateUrl: './dashboard-page.component.html'
 })
-export class DashboardPageComponent implements OnInit {
+export class DashboardPageComponent implements OnInit, AfterViewInit {
+
+    @ViewChild(MenuComponent)
+    dashboardMenu: MenuComponent;
 
     categories$: Observable<Category[]>;
     loading$: Observable<boolean>;
@@ -47,6 +51,10 @@ export class DashboardPageComponent implements OnInit {
 
     ngOnInit(): void {
 
+    }
+
+    ngAfterViewInit() {
+        console.log('dashboardMenu', this.dashboardMenu);
     }
 
 }

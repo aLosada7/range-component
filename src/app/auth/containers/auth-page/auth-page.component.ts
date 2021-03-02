@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
@@ -10,6 +10,7 @@ import { Identity } from './../../models/identity.enum';
 
 @Component({
   selector: 'tms-auth-page',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './auth-page.component.html'
 })
 export class AuthPageComponent implements OnInit, OnDestroy {

@@ -1,3 +1,4 @@
 <div *ngIf="category$ | async as category">
     <pre>CATEGORY DEBUG LOGGING: {{ category | json }}</pre>
 </div>
+<tms-menu [categorySelected]="category$ | async" #dashboardMenu></tms-menu>

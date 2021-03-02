@@ -1,5 +1,5 @@
 import { MyErrorStateMatcher } from '../../../shared/validators/error-state-matcher';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { emailValidator } from '../../../shared/validators/email.validator';
@@ -8,6 +8,7 @@ import { matchPasswordValidator } from '../../../shared/validators/match-passwor
 
 @Component({
   selector: 'tms-sign-up',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './sign-up.component.html'
 })
 export class SignUpComponent implements OnInit {

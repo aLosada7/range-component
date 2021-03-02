@@ -1,10 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { emailValidator } from '../../../shared/validators/email.validator';
 
 @Component({
   selector: 'tms-password-reset',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './password-reset.component.html'
 })
 export class PasswordResetComponent implements OnInit {

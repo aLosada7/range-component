@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Params } from '@angular/router';
 
@@ -6,6 +6,7 @@ import { matchPasswordValidator } from 'src/app/shared/validators/match-password
 
 @Component({
   selector: 'tms-password-create',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './password-create.component.html'
 })
 export class PasswordCreateComponent implements OnInit {

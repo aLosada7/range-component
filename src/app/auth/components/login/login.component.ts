@@ -1,10 +1,11 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { emailValidator } from '../../../shared/validators/email.validator';
 
 @Component({
   selector: 'tms-login',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './login.component.html'
 })
 export class LoginComponent implements OnInit {
