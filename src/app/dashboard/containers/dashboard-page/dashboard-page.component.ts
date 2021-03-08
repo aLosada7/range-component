@@ -1,11 +1,14 @@
 import { BehaviorSubject, Observable } from 'rxjs';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, ParamMap, Params } from '@angular/router';
+import { select, Store } from '@ngrx/store';
+import { map, take } from 'rxjs/operators';
 
 import { Category } from 'src/app/core/models/category.model';
 import { Subcategory } from 'src/app/core/models/subcategory.model';
-import { map, take } from 'rxjs/operators';
 import { MenuComponent } from '../../components/menu/menu.component';
+import * as fromRoot from '../../../reducers';
+import * as fromDashboard from '../../reducers/dashboard.reducer';
 
 export interface SelectedCategory {
     category: number;
@@ -26,10 +29,8 @@ export class DashboardPageComponent implements OnInit, AfterViewInit {
 
     public category$: Observable<SelectedCategory>;
 
-    constructor(private route: ActivatedRoute) {
-        /*this.categories$ = store.pipe(
-            select(fromCustomers.getSelectedCustomer),
-            map(customer => this.customerService.adaptCustomer(customer)));*/
+    constructor(private route: ActivatedRoute,
+        private store: Store<fromDashboard.State>) {
         this.category$ = this.route.queryParamMap.pipe(
             map((params: ParamMap): SelectedCategory => {
                 const catParam: string | undefined = params.get('category');
@@ -47,6 +48,8 @@ export class DashboardPageComponent implements OnInit, AfterViewInit {
                 return { category, subcategory };
             })
         );
+
+        this.categories$ = store.pipe(select(fromRoot.getCategories))
     }
 
     ngOnInit(): void {
