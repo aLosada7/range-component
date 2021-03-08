@@ -6,10 +6,13 @@
     color: $primary-color;
 }
 
+.header-backgrounded {
+    background-color: $secondary-color;
+}
+
 //navbar
 .navbar {
     z-index: 1;
-    background-color: $secondary-color;
 
     &__items {
         justify-content: flex-end;
@@ -43,8 +46,15 @@
 }
 
 .s-header {
-    min-height: 900px;
     height: 100vh;
     padding-top: 0;
     margin-top: -73px;
+}
+
+.toolbar-wrapper {
+    padding: 0 2rem;
+
+    @media only screen and (max-width: $bp-tablet) {
+        padding: 0;
+    }
 }

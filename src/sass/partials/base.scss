@@ -18,14 +18,6 @@ body {
     background-color: $background-color;
 }
 
-section {
-    padding: 80px 0 95px;
-
-    @media only screen and (max-width: $bp-tablet) {
-        padding: 0;
-    }
-}
-
 .cursor {
     cursor: pointer;
 }
@@ -71,11 +63,6 @@ h4 {
     font-size: 14px;
 }
 
-// hyperlink
-a {
-    text-decoration: none;
-}
-
 .card-title {
     padding: 16px;
 }
@@ -96,6 +83,17 @@ tms-loading {
     padding: 20rem;
 }
 
+// routerlink focus outline
+*[ng-reflect-router-link]:focus {
+    outline: none;
+}
+
+ // hyperlink
+a {
+    text-decoration: none;
+}
+
+// list
 li {
     list-style-type: none;
 }

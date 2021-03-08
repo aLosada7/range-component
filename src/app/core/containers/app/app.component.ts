@@ -37,11 +37,15 @@ export class AppComponent implements OnInit{
         return !this.router.url.includes("identity");
     }
 
+    showNavBackground(): boolean {
+        return this.router.url.includes("landing");
+    }
+
     private loadInitialData() {
         this.store.pipe(
           take(1),
         ).subscribe(state => {
           this.masterService.dispatchMasterActions();
         });
-      }
+    }
 }

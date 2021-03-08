@@ -49,7 +49,7 @@ export class DashboardPageComponent implements OnInit, AfterViewInit {
             })
         );
 
-        this.categories$ = store.pipe(select(fromRoot.getCategories))
+        this.categories$ = store.pipe(select(fromRoot.getCategories));
     }
 
     ngOnInit(): void {
