@@ -6,11 +6,16 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class MenuComponent implements OnInit {
 
+    @Input() categories;
     @Input() categorySelected;
 
     constructor() { }
 
     ngOnInit(): void {
+    }
+
+    handleSubcategoryNavigation($event: MouseEvent) {
+        $event.stopPropagation();
     }
 
 }

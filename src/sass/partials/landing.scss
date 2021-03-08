@@ -1,22 +1,10 @@
 .headline {
-    height: -webkit-fill-available;
     background-image: linear-gradient(0deg, hsla(0%, 0%, 0%, .55), hsla(0%, 0%, 0%, .55)), url('https://images.pexels.com/photos/4246102/pexels-photo-4246102.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260');
     margin: 0;
     padding: 0; /*if your want to padding */
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-
-    &:before {
-        margin: 0;
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-
-    }
 
     &__content {
         width: 100%;

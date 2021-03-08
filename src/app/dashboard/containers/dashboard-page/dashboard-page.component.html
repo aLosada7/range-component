@@ -4,4 +4,7 @@
 <div *ngIf="categories$ | async as categories">
     <pre>CATEGORIES: {{ categories | json }}</pre>
 </div>
-<tms-menu [categorySelected]="category$ | async" #dashboardMenu></tms-menu>
+<tms-menu
+    [categories]="categories$ | async"
+    [categorySelected]="category$ | async"
+    #dashboardMenu></tms-menu>
