@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { IRange } from '../../models/range.model';
-import { MasterService } from '../../services/master.service';
 import { Subscription } from 'rxjs';
 import { Bullet } from '../../models/bullet.model';
+import { MockService } from '../../services/mock.service';
 
 @Component({
   selector: 'ngc-exercise1-page',
@@ -17,14 +17,14 @@ export class Exercise1PageComponent implements OnInit, OnDestroy {
 
     loadDataSubscription: Subscription;
 
-    constructor(private masterService: MasterService) { }
+    constructor(private mockService: MockService) { }
 
     ngOnInit(): void {
         this.loadInitialData();
     }
 
     private loadInitialData() {
-        this.loadDataSubscription = this.masterService.getRandomRangeValues().subscribe(rangeValues => {
+        this.loadDataSubscription = this.mockService.getRandomRangeValues().subscribe(rangeValues => {
             this.rangeValues = rangeValues;
             this.defaultMinMaxRangeValues = this.rangeValues;
         })

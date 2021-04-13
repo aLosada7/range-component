@@ -1,27 +1,25 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
-import { HttpRequestInterceptorMock } from '../interceptors/httpInterceptorMock.interceptor';
-import { MasterService } from './master.service';
 import { environment } from 'src/environments/environment';
 import { mockRandomValues } from './mockRandomValues';
 import { mockFixedValues } from './mockFixedValues';
+import { MockService } from './mock.service';
 
 describe('Master Service', () => {
     let httpTestingController: HttpTestingController
-    let service: MasterService;
+    let service: MockService;
 
     beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [HttpClientTestingModule],
             providers: [
-                MasterService,
+                MockService,
             ]
         });
 
         httpTestingController = TestBed.inject(HttpTestingController);
-        service = TestBed.inject(MasterService);
+        service = TestBed.inject(MockService);
     });
 
     it('should be created', () => {

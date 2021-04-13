@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { IRange } from '../models/range.model';
-import { environment } from 'src/environments/environment';
+import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs/internal/Observable';
+
 
 @Injectable({
   providedIn: 'root'
 })
-export class MasterService {
+export class MockService {
 
     constructor(private http: HttpClient) { }
 

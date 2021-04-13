@@ -107,20 +107,9 @@ export class RangeComponent implements OnInit, ControlValueAccessor {
         });
 
         this.leftPointerMoveSubscription = fromEvent(this.leftBullet.nativeElement, 'mousemove')
-        .subscribe((e: any) => {
-            if (this.pointSelected &&  e['screenX'] > this.pointSelected && this.rangeValues.min + 1 < this.rangeValues.max) {
-                this.rangeChange.emit({
-                    bullet: Bullet.Left,
-                    move: 1 // asc
-                })
-                this.pointSelected = this.pointSelected + 1;
-            } else if (this.pointSelected &&  e['screenX'] < this.pointSelected && this.rangeValues.min > this.min) {
-                this.rangeChange.emit({
-                    bullet: Bullet.Left,
-                    move: -1 // desc
-                })
-                this.pointSelected = this.pointSelected - 1;
-            }
+        .subscribe((event: any) => {
+            const move = this.getLeftBulletMove(event);
+            this.makeMove(move);
         });
 
         this.rightPointerMouseDownSubscription = fromEvent(this.rightBullet.nativeElement, 'mousedown')
@@ -134,35 +123,70 @@ export class RangeComponent implements OnInit, ControlValueAccessor {
         });
 
         this.rightPointerMoveSubscription = fromEvent(this.rightBullet.nativeElement, 'mousemove')
-        .subscribe((e: any) => {
-            if (this.pointSelected &&  e['screenX'] < this.pointSelected && this.rangeValues.max - 1 > this.rangeValues.min) {
-                this.rangeChange.emit({
-                    bullet: Bullet.Right,
-                    move: -1 // desc
-                })
-                this.pointSelected = this.pointSelected - 1;
-            } else if (this.pointSelected &&  e['screenX'] > this.pointSelected && this.rangeValues.max < this.max) {
-                this.rangeChange.emit({
-                    bullet: Bullet.Right,
-                    move: 1 // asc
-                })
-                this.pointSelected = this.pointSelected + 1;
-            }
+        .subscribe((event: any) => {
+            const move = this.getRightBulletMove(event);
+            this.makeMove(move);
         });
+    }
+
+    getLeftBulletMove(event) {
+        let move;
+
+        if (this.pointSelected &&  event['screenX'] > this.pointSelected && this.rangeValues.min + 1 < this.rangeValues.max) {
+            move = {
+                bullet: Bullet.Left,
+                move: 1 // asc
+            }
+            this.pointSelected = this.pointSelected + 1;
+        } else if (this.pointSelected &&  event['screenX'] < this.pointSelected && this.rangeValues.min > this.min) {
+            move = {
+                bullet: Bullet.Left,
+                move: -1 // desc
+            }
+            this.pointSelected = this.pointSelected - 1;
+        }
+
+        return move;
+    }
+
+    getRightBulletMove(event) {
+        let move;
+
+        if (this.pointSelected &&  event['screenX'] < this.pointSelected && this.rangeValues.max - 1 > this.rangeValues.min) {
+            move = {
+                bullet: Bullet.Right,
+                move: -1 // desc
+            }
+            this.pointSelected = this.pointSelected - 1;
+        } else if (this.pointSelected &&  event['screenX'] > this.pointSelected && this.rangeValues.max < this.max) {
+            move = {
+                bullet: Bullet.Right,
+                move: 1 // asc
+            }
+            this.pointSelected = this.pointSelected + 1;
+        }
+
+        return move;
+    }
+
+    makeMove(move) {
+        if (move) {
+            this.rangeChange.emit(move)
+        }
     }
 
     // update values introduced from input
     updateRangeValues(event: any, bullet: Bullet) {
         const newValue = event.target.value;
-        if (this.isValueValid(bullet, newValue)) {
-            this.rangeChange.emit({
+        if (this.isInputValueValid(bullet, newValue)) {
+            this.makeMove({
                 bullet: bullet,
                 newValue: newValue
             });
         }
     }
 
-    isValueValid(bullet: Bullet, newValue: number) {
+    isInputValueValid(bullet: Bullet, newValue: number) {
         return (bullet === Bullet.Left) ? (newValue >= this.min && newValue < this.rangeValues.max) : (newValue <= this.max && newValue > this.rangeValues.min);
     }
 
@@ -174,6 +198,7 @@ export class RangeComponent implements OnInit, ControlValueAccessor {
             });
         }
     }
+
     isMoveValid(move: number, bullet: Bullet) {
         return (bullet === Bullet.Left) ?
         !(move < 0 && this.rangeValues.min === this.min) && this.rangeValues.min + 1 < this.rangeValues.max :

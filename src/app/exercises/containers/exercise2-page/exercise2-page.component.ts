@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { range, Subscription } from 'rxjs';
 import { Bullet } from '../../models/bullet.model';
 import { IRange } from '../../models/range.model';
-import { MasterService } from '../../services/master.service';
+import { MockService } from '../../services/mock.service';
 
 @Component({
   selector: 'ngc-exercise2-page',
@@ -18,10 +18,10 @@ export class Exercise2PageComponent implements OnInit, OnDestroy {
 
     loadDataSubscription: Subscription;
 
-    constructor(private masterService: MasterService) { }
+    constructor(private mockService: MockService) { }
 
     ngOnInit(): void {
-        this.loadDataSubscription = this.masterService.getFixedRangeValues().subscribe(values => {
+        this.loadDataSubscription = this.mockService.getFixedRangeValues().subscribe(values => {
             this.values = values;
 
             this.min = values[0];
