@@ -44,16 +44,15 @@ export class RangeComponent implements OnInit, ControlValueAccessor {
     rightPointerMoveSubscription: Subscription;
 
     constructor() {
-                // range values initialization
-                this.rangeValues = {
-                    min: 0,
-                    max: 0
-                }
+        // range values initialization
+        this.rangeValues = {
+            min: 0,
+            max: 0
+        }
 
         this.mobileDebouncer
             .pipe(debounceTime(10))
             .subscribe((options) => {
-                console.log(options);
                 this.rangeChange.emit({
                     bullet: options.bullet,
                     move: options.move

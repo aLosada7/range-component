@@ -35,15 +35,17 @@ export class Exercise2PageComponent implements OnInit, OnDestroy {
     }
 
     onRangeChange(event) {
-        if (event.bullet === Bullet.Left) {
+        if (event.bullet === Bullet.Left ) {
             this.rangeValues = {
                 ...this.rangeValues,
-                min: event.move ? this.values[this.values.indexOf(this.rangeValues.min) + (event.move > 0 ? 1 : (-1))] : this.rangeValues.min //as the list is sorted
+                min: event.move == -1 || (event.move == 1 && this.values.indexOf(this.rangeValues.min) + 1 < this.values.indexOf(this.rangeValues.max))
+                ? this.values[this.values.indexOf(this.rangeValues.min) + (event.move > 0 ? 1 : (-1))] : this.rangeValues.min //as the list is sorted
             }
         } else {
             this.rangeValues = {
                 ...this.rangeValues,
-                max: event.move ? this.values[this.values.indexOf(this.rangeValues.max) + (event.move > 0 ? 1 : (-1))] : this.rangeValues.max
+                max: event.move == 1 || (event.move == -1 && this.values.indexOf(this.rangeValues.max) > this.values.indexOf(this.rangeValues.min) + 1)
+                ? this.values[this.values.indexOf(this.rangeValues.max) + (event.move > 0 ? 1 : (-1))] : this.rangeValues.max
             }
         }
     }
